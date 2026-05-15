@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ordr.AI | Main Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FE3C06",
+              "primary-container": "#FFEDE8",
+              secondary: "#77574E",
+              surface: "#FFF8F6",
+              background: "#FFF8F6",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-low": "#FFF1ED",
+              "surface-container": "#F9E4DF",
+              "surface-container-high": "#F4DED9",
+              "surface-container-highest": "#F4DED9",
+              "surface-variant": "#F5DED8",
+              "on-surface": "#231A17",
+              "on-surface-variant": "#53433F",
+              "on-primary": "#ffffff",
+              outline: "#85736E",
+              "outline-variant": "#D8C2BC",
+              error: "#BA1A1A"
+            },
+            borderRadius: {
+              DEFAULT: "0.75rem",
+              lg: "0.75rem",
+              xl: "1rem",
+              full: "9999px"
+            },
+            fontFamily: {
+              headline: ["Plus Jakarta Sans", "sans-serif"],
+              body: ["Plus Jakarta Sans", "sans-serif"],
+              label: ["Plus Jakarta Sans", "sans-serif"]
+            }
+          }
+        }
+      };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

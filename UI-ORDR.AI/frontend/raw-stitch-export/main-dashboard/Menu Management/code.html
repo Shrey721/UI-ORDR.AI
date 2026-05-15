@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Menu Management | Ordr Velocity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#747474",
+                        "surface-container-highest": "#f2e4e1",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#3d0700",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2a313d",
+                        "secondary-fixed": "#7ffc97",
+                        "surface-tint": "#FF4E17",
+                        "on-secondary-fixed": "#002109",
+                        "background": "#FDF3EF",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-primary-container": "#ffffff",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "surface-variant": "#f2e4e1",
+                        "on-tertiary-container": "#fcfcfc",
+                        "surface-container-low": "#FEF7F4",
+                        "primary-fixed": "#ffdcd3",
+                        "on-surface": "#2D1D19",
+                        "outline": "#926f66",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "on-primary-fixed-variant": "#8b1b00",
+                        "error": "#ba1a1a",
+                        "secondary": "#00BD40",
+                        "outline-variant": "#e8bdb3",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#FDF3EF",
+                        "secondary-fixed-dim": "#62df7d",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#f2e4e1",
+                        "primary-container": "#FF4E17",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#ffb4a3",
+                        "inverse-on-surface": "#ebf1ff",
+                        "surface": "#FDF3EF",
+                        "on-tertiary-fixed": "#1b1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#ffb4a3",
+                        "on-secondary-fixed-variant": "#005320",
+                        "surface-container": "#F9ECE7",
+                        "primary": "#FF4E17",
+                        "tertiary": "#5c5c5c",
+                        "on-surface-variant": "#5d3f38",
+                        "surface-container-high": "#F5E6E1",
+                        "secondary-container": "#E0FBE8",
+                        "on-background": "#2D1D19",
+                        "on-secondary-container": "#007230"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FDF3EF; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="text-on-surface antialiased overflow-hidden">
+<!-- SideNavBar (Authority: Shared Components JSON) -->
+<aside class="fixed left-0 top-0 bottom-0 flex flex-col p-6 z-50 bg-[#FDF3EF] w-64 h-screen shadow-[32px_0_64px_rgba(21,28,39,0.02)] font-['Plus_Jakarta_Sans'] font-medium text-sm border-r border-on-surface/5">
+<div class="flex items-center gap-3 mb-10"><img alt="Ordr Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ujMI0ZJvkuv57oVn9YlNKVsXnViXNDRWCvQHCrfrIrCfgg0B3onxiuFQ_uWb8RxPzJyp61u6X92bHBUaKR_AF01uZCxhWBaetZlgWMM_E2quAb2vTyq3r06ww2FeFAcL0hcEWCbw5cRTwZGzUNpklaMQ3Ne35hs7_1dEqNUS5OZYnOYmk41AUgs5NaJS4iEcHjX6-93wx6oR5fDs7XrAEUV5R6C0toZgDDy7Mmyfjt48KmizoruarDNwKmlbyFVo77ieNLvmEEdEw"/></div>
+<nav class="flex-1 space-y-1"><!-- Command Center -->
+<a class="flex items-center gap-3 px-4 text-on-surface/70 hover:bg-white/50 transition-all rounded-lg group py-2" href="#">
+<span class="material-symbols-outlined text-black">dashboard</span>
+<span>Command Center</span>
+</a>
+<!-- Menu Management (Active State) -->
+<a class="flex items-center gap-3 px-4 text-white font-bold bg-[#FF4E17] shadow-lg shadow-primary/20 scale-98 active:translate-x-1 duration-200 py-2 rounded-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span>Menu Management</span>
+</a>
+<!-- Customer Insights -->
+<a class="flex items-center gap-3 px-4 text-on-surface/70 hover:bg-white/50 transition-all rounded-lg group py-2" href="#">
+<span class="material-symbols-outlined text-black">group</span>
+<span>Customer Insights</span>
+</a>
+<!-- Food Insights -->
+<a class="flex items-center gap-3 px-4 text-on-surface/70 hover:bg-white/50 transition-all rounded-lg group py-2" href="#">
+<span class="material-symbols-outlined text-black">restaurant</span>
+<span>Food Insights</span>
+</a>
+<!-- Financials -->
+<a class="flex items-center gap-3 px-4 text-on-surface/70 hover:bg-white/50 transition-all rounded-lg group py-2" href="#">
+<span class="material-symbols-outlined text-black">payments</span>
+<span>Financials</span>
+</a>
+<!-- Logistic Insights -->
+<a class="flex items-center gap-3 px-4 text-on-surface/70 hover:bg-white/50 transition-all rounded-lg group py-2" href="#">
+<span class="material-symbols-outlined text-black">local_shipping</span>
+<span>Logistic Insights</span>
+</a>
+<!-- Outlet Settings -->
+<a class="flex items-center gap-3 px-4 text-on-surface/70 hover:bg-white/50 transition-all rounded-lg group py-2" href="#">
+<span class="material-symbols-outlined text-black">settings</span>
+<span>Outlet Settings</span>
+</a></nav>
+<div class="mt-auto space-y-2 pt-6 border-t border-on-surface/5">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface/70 hover:bg-white/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar (Authority: Shared Components JSON) -->
+<header class="fixed top-0 right-0 left-64 h-16 flex items-center justify-between px-8 backdrop-blur-xl z-40 font-['Plus_Jakarta_Sans'] tracking-tight bg-[#f8f6f5]">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full bg-[#e9d6d1] rounded-full px-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface/40 text-[#4a3f3c]">search</span>
+<input class="w-full border-none rounded-full pl-10 py-2 focus:ring-2 focus:ring-primary/20 text-sm bg-transparent" placeholder="Search orders, customers, or menu items..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface/60 hover:bg-white rounded-full transition-colors">
+<span class="material-symbols-outlined text-[#4a3f3c]">notifications</span>
+</button>
+<button class="w-10 h-10 items-center justify-center text-on-surface/60 hover:bg-white rounded-full transition-colors hidden">
+<span class="material-symbols-outlined text-[#4a3f3c]">settings</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface/60 hover:bg-white rounded-full transition-colors">
+<span class="material-symbols-outlined text-[#4a3f3c]">help</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<img alt="Chef" class="w-10 h-10 rounded-full object-cover border-2 border-[#e9d6d1]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuMARlnBSiVDApPNClgp3oqU5FZeUczQ4YM2E-0m4s9ccOO_YhPgkaAtwxF3vGWksT_wAZTUsBUEoNkZDloVo-cQs7UOl7AQbd054NKzIUIM9CgE3CkXytjhdd_wU95pmqrZdciTh-kENkSf1OtGqJftQTN0PsmHkct6Re-pTF3U4s7Dh8R-UOY2o7-eSwmafgVn7owOtU9qBUaf3EpDhvmNE17QX47Ey4g2zbDkBy_2NCdSKkwAKD-wnaLZmoWzS08n9ayH2b6jpB"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pl-64 pt-16 h-screen flex">
+<!-- Center Dashboard Area -->
+<div class="flex-1 overflow-y-auto no-scrollbar p-8">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tighter text-on-surface">Menu Management</h1>
+<p class="text-on-surface/60 mt-1">Manage your dishes, availability, and seasonal items</p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 border-2 border-primary/20 text-primary font-bold rounded-full hover:bg-white transition-all text-sm">
+                        Upload Menu
+                    </button>
+<button class="px-6 py-2.5 bg-[#FF4E17] text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        Add New Item
+                    </button>
+</div>
+</div>
+<!-- OCR Section / Menu Source -->
+<div class="bg-white rounded-2xl p-8 mb-8 shadow-sm">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container flex items-center justify-center text-[#00BD40]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+</div>
+<div>
+<h3 class="font-bold text-lg text-on-surface">Menu Source</h3>
+<p class="text-sm text-on-surface/50">Auto-sync your physical menu using AI</p>
+</div>
+</div>
+<div class="border-2 border-dashed border-primary/10 rounded-2xl p-10 flex flex-col items-center justify-center bg-background/50 hover:bg-background transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-on-surface/20 group-hover:text-primary transition-colors mb-3">cloud_upload</span>
+<p class="text-on-surface/80 font-medium">Drag and drop your menu PDF or CSV</p>
+<p class="text-xs text-on-surface/40 mt-1 italic">Menu items will be auto-extracted and categorized instantly.</p>
+</div>
+</div>
+<!-- Filters & Table -->
+<div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+<!-- Filters -->
+<div class="p-6 flex items-center gap-4 flex-wrap border-b border-on-surface/5">
+<div class="relative flex-1 min-w-[240px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface/40 text-[20px]">search</span>
+<input class="w-full bg-transparent border-0 border-b border-on-surface/10 focus:ring-0 focus:border-primary text-sm pl-10 pb-2" placeholder="Search menu items..." type="text"/>
+</div>
+<select class="bg-transparent border-0 border-b border-on-surface/10 focus:ring-0 focus:border-primary text-sm py-2 pr-8">
+<option>Category: All</option>
+<option>Appetizers</option>
+<option>Main Course</option>
+<option>Beverages</option>
+</select>
+<select class="bg-transparent border-0 border-b border-on-surface/10 focus:ring-0 focus:border-primary text-sm py-2 pr-8">
+<option>Availability: All</option>
+<option>Active</option>
+<option>Inactive</option>
+</select>
+<select class="bg-transparent border-0 border-b border-on-surface/10 focus:ring-0 focus:border-primary text-sm py-2 pr-8">
+<option>Time-Based: All</option>
+<option>Breakfast</option>
+<option>Lunch</option>
+<option>Snacks</option>
+<option>Dinner</option>
+<option>Standard</option>
+<option>Seasonal</option></select>
+</div>
+<!-- Table Content -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-background/40">
+<tr>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface/40">Item Name</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface/40">Category</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface/40 text-right">Price (₹)</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface/40">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface/40">Tags</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface/40 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-on-surface/5">
+<!-- Mango Lassi -->
+<tr class="hover:bg-background/20 transition-colors cursor-pointer group bg-primary/5">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<span class="font-bold text-on-surface">Mango Lassi</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface/70">Beverages</td>
+<td class="px-6 py-5 text-sm font-bold text-right">180.00</td>
+<td class="px-6 py-5">
+<div class="w-10 h-5 bg-secondary-container rounded-full relative flex items-center px-1">
+<div class="w-3 h-3 bg-secondary rounded-full ml-auto shadow-sm"></div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-[#FFDCD3] text-[#8b1b00] text-[10px] font-extrabold uppercase rounded-full">Seasonal</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="w-8 h-8 rounded-full hover:bg-background flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface/40 group-hover:text-primary">edit</span>
+</button>
+</td>
+</tr>
+<!-- Breakfast Thali -->
+<tr class="hover:bg-background/20 transition-colors cursor-pointer group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<span class="font-bold text-on-surface">Breakfast Thali</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface/70">Main Course</td>
+<td class="px-6 py-5 text-sm font-bold text-right">250.00</td>
+<td class="px-6 py-5">
+<div class="w-10 h-5 bg-secondary-container rounded-full relative flex items-center px-1">
+<div class="w-3 h-3 bg-secondary rounded-full ml-auto shadow-sm"></div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container text-on-surface/60 text-[10px] font-extrabold uppercase rounded-full">Breakfast</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="w-8 h-8 rounded-full hover:bg-background flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface/40 group-hover:text-primary">edit</span>
+</button>
+</td>
+</tr>
+<!-- Butter Naan -->
+<tr class="hover:bg-background/20 transition-colors cursor-pointer group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<span class="font-bold text-on-surface">Butter Naan</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface/70">Breads</td>
+<td class="px-6 py-5 text-sm font-bold text-right">60.00</td>
+<td class="px-6 py-5">
+<div class="w-10 h-5 bg-secondary-container rounded-full relative flex items-center px-1">
+<div class="w-3 h-3 bg-secondary rounded-full ml-auto shadow-sm"></div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-low text-on-surface/40 text-[10px] font-extrabold uppercase rounded-full">Standard</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="w-8 h-8 rounded-full hover:bg-background flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface/40 group-hover:text-primary">edit</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Persistent Right Detail Panel (Editor) -->
+<aside class="w-[400px] bg-white border-l border-on-surface/5 h-full overflow-y-auto no-scrollbar flex flex-col relative">
+<div class="p-8 pb-4 flex items-center justify-between">
+<h2 class="text-xl font-extrabold tracking-tight text-on-surface">Edit Item</h2>
+<button class="w-8 h-8 rounded-full hover:bg-background flex items-center justify-center text-on-surface/30">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 px-8 space-y-8 pb-32">
+<!-- Basic Info Fields -->
+<div class="space-y-6">
+<div class="relative border-b border-on-surface/10 focus-within:border-primary transition-colors pb-1">
+<label class="block text-[10px] font-extrabold uppercase tracking-widest text-on-surface/40 mb-1">Item Name</label>
+<input class="w-full border-0 p-0 focus:ring-0 font-bold text-lg bg-transparent text-on-surface" type="text" value="Mango Lassi"/>
+</div>
+<div class="flex gap-4">
+<div class="flex-1 relative border-b border-on-surface/10 focus-within:border-primary transition-colors pb-1">
+<label class="block text-[10px] font-extrabold uppercase tracking-widest text-on-surface/40 mb-1">Price (₹)</label>
+<input class="w-full border-0 p-0 focus:ring-0 font-bold text-lg bg-transparent text-on-surface" type="text" value="180.00"/>
+</div>
+<div class="flex-1 relative border-b border-on-surface/10 focus-within:border-primary transition-colors pb-1">
+<label class="block text-[10px] font-extrabold uppercase tracking-widest text-on-surface/40 mb-1">Category</label>
+<select class="w-full border-0 p-0 focus:ring-0 font-bold text-lg bg-transparent appearance-none text-on-surface">
+<option>Beverages</option>
+<option>Appetizers</option>
+<option>Main Course</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Time-Based Availability -->
+<div>
+<label class="block text-[10px] font-extrabold uppercase tracking-widest text-on-surface/40 mb-4">Time-Based Availability</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 bg-background text-on-surface/70 text-xs font-bold rounded-full hover:bg-primary/10 transition-colors">Breakfast</button>
+<button class="px-4 py-2 bg-[#FF4E17] text-white text-xs font-bold rounded-full shadow-md shadow-primary/20">Lunch</button>
+<button class="px-4 py-2 bg-background text-on-surface/70 text-xs font-bold rounded-full hover:bg-primary/10 transition-colors">Snacks</button>
+<button class="px-4 py-2 bg-background text-on-surface/70 text-xs font-bold rounded-full hover:bg-primary/10 transition-colors">Dinner</button>
+<button class="px-4 py-2 bg-background text-on-surface/70 text-xs font-bold rounded-full hover:bg-primary/10 transition-colors">Standard</button>
+</div>
+</div>
+<!-- Seasonal Availability -->
+<div>
+<div class="flex items-center justify-between mb-4">
+<label class="text-[10px] font-extrabold uppercase tracking-widest text-on-surface/40">Seasonal Availability</label>
+<div class="w-10 h-5 bg-secondary-container rounded-full relative flex items-center px-1 cursor-pointer">
+<div class="w-3 h-3 bg-secondary rounded-full ml-auto shadow-sm"></div>
+</div>
+</div>
+<div class="bg-background/40 p-4 rounded-xl border border-on-surface/5 space-y-4">
+<div class="flex gap-4">
+<div class="flex-1 relative border-b border-on-surface/10 focus-within:border-primary transition-colors pb-1">
+<label class="block text-[8px] font-extrabold uppercase tracking-widest text-on-surface/40 mb-1">Start Date</label>
+<input class="w-full border-0 p-0 focus:ring-0 font-bold text-sm bg-transparent text-on-surface" type="text" value="May 01"/>
+</div>
+<div class="flex-1 relative border-b border-on-surface/10 focus-within:border-primary transition-colors pb-1">
+<label class="block text-[8px] font-extrabold uppercase tracking-widest text-on-surface/40 mb-1">End Date</label>
+<input class="w-full border-0 p-0 focus:ring-0 font-bold text-sm bg-transparent text-on-surface" type="text" value="Aug 31"/>
+</div>
+</div>
+<p class="text-xs text-on-surface/50 leading-relaxed italic">
+                            This item will automatically appear in your menu during the selected date range and be hidden outside it.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Fixed Footer Actions -->
+<div class="absolute bottom-0 right-0 w-full bg-white/80 backdrop-blur-xl p-8 border-t border-on-surface/5 flex gap-4">
+<button class="flex-1 py-3 border-2 border-primary/20 rounded-full font-bold text-primary hover:bg-primary/5 transition-all">
+                    Cancel
+                </button>
+<button class="flex-1 py-3 bg-[#FF4E17] text-white rounded-full font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                    Save Changes
+                </button>
+</div>
+</aside>
+</main>
+</body></html>

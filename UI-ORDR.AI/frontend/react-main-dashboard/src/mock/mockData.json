@@ -1,0 +1,91 @@
+{
+  "commandCenterData": {
+    "activeOrders": 6,
+    "activeOrdersChange": 2,
+    "changeTimeframe": "15 mins",
+    "kpiMetrics": [
+      { "id": 1, "label": "Total Orders", "value": 62, "trend": 5, "trendUp": true },
+      { "id": 2, "label": "Revenue", "value": "₹12,400", "trend": 3, "trendUp": true }
+    ],
+    "orders": [
+      { "id": "ORD-101", "customer": { "name": "Raj" }, "items": "Paneer Tikka, Naan", "value": "₹450", "status": "Pending", "time": "12:02 PM" },
+      { "id": "ORD-102", "customer": { "name": "Sana" }, "items": "Masala Dosa", "value": "₹180", "status": "Preparing", "time": "12:05 PM" }
+    ]
+  },
+
+  "customerInsightsData": {
+    "kpiMetrics": [
+      { "id": 1, "label": "Total Unique", "value": "5,432", "trend": 8, "trendUp": true },
+      { "id": 2, "label": "Returning %", "value": "64%", "trend": -1, "trendUp": false }
+    ],
+    "customerGrowth": [
+      { "day": "Mon", "new": 12, "returning": 18 },
+      { "day": "Tue", "new": 14, "returning": 20 }
+    ]
+  },
+
+  "financialsData": {
+    "earnings": [
+      { "id": 1, "label": "Current Earnings", "value": "₹24,500" },
+      { "id": 2, "label": "Today's Revenue", "value": "₹1,900" }
+    ],
+    "transactions": [
+      { "id": "TXN-200", "order": "ORD-101", "date": "May 09, 2026", "amount": "₹450.00", "status": "Completed" }
+    ]
+  },
+
+  "foodInsightsData": {
+    "kpiMetrics": [
+      { "id": 1, "label": "Total Orders", "value": "1,284", "trend": 12.4 },
+      { "id": 2, "label": "Gross Revenue", "value": "₹425k", "trend": 8.1 }
+    ],
+    "topItems": [
+      { "rank": 1, "name": "Spicy Paneer Tikka", "orders": 342, "delta": 14 },
+      { "rank": 2, "name": "Truffle Mushroom Pasta", "orders": 298, "delta": 9 }
+    ],
+    "itemGrowth": [
+      { "day": "Mon", "newItems": 12, "bestSellers": 24 },
+      { "day": "Tue", "newItems": 16, "bestSellers": 28 }
+    ]
+  },
+
+  "menuManagementData": {
+    "menuItems": [
+      { "id": 1, "name": "Paneer Tikka", "category": "Appetizers", "price": 200, "status": true, "tags": ["Veg"] },
+      { "id": 2, "name": "Masala Dosa", "category": "Breakfast", "price": 120, "status": true, "tags": ["Veg"] }
+    ],
+    "categories": ["Main Course", "Appetizers", "Breakfast", "Beverages"],
+    "timeSlots": [
+      { "id": "breakfast", "label": "Breakfast", "time": "7:00 AM - 11:00 AM" },
+      { "id": "lunch", "label": "Lunch", "time": "11:00 AM - 4:00 PM" }
+    ]
+  },
+
+  "outletSettingsData": {
+    "profileHealth": 80,
+    "whatsappConnected": true,
+    "systemStatus": "Operational",
+    "acceptingOrders": true,
+    "tabs": [
+      { "id": "restaurant-info", "label": "Restaurant Info" },
+      { "id": "delivery-setup", "label": "Delivery Setup" },
+      { "id": "operating-hours", "label": "Operating Hours" },
+      { "id": "messaging", "label": "Messaging" },
+      { "id": "system-health", "label": "System Health" }
+    ],
+    "operatingHours": [
+      { "day": "Monday", "open": "10:00 AM", "close": "11:00 PM", "closed": false },
+      { "day": "Tuesday", "open": "10:00 AM", "close": "11:00 PM", "closed": false }
+    ]
+  },
+
+  "navigationItems": [
+    { "id": "command-center", "label": "Command Center", "icon": "dashboard" },
+    { "id": "menu-management", "label": "Menu Management", "icon": "menu_book" },
+    { "id": "customer-insights", "label": "Customer Insights", "icon": "people" },
+    { "id": "food-insights", "label": "Food Insights", "icon": "restaurant" },
+    { "id": "financials", "label": "Financials", "icon": "account_balance" },
+    { "id": "logistic-insights", "label": "Logistic Insights", "icon": "local_shipping" },
+    { "id": "outlet-settings", "label": "Outlet Settings", "icon": "settings" }
+  ]
+}

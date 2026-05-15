@@ -1,0 +1,66 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: "Be Vietnam Pro", sans-serif;
+  background-color: #fff8f6;
+  color: #231a17;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.font-headline {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* Utility for hiding scrollbars while maintaining scroll */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Material Symbols icon styling */
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff8f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d8c2bc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #85736e;
+}

@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ORDR.ai | Restaurant Food Parcel Manager</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-surface-variant": "#53433f",
+                "on-primary-container": "#ffffff",
+                "secondary-fixed": "#d1fae5",
+                "surface-bright": "#ffffff",
+                "on-surface": "#1a1c1e",
+                "on-error": "#ffffff",
+                "surface-container": "#eeebe9",
+                "surface-dim": "#e5e3e2",
+                "primary-fixed-dim": "#ffb4a1",
+                "on-primary": "#ffffff",
+                "secondary-fixed-dim": "#b4e0ca",
+                "inverse-primary": "#ffb4a1",
+                "inverse-surface": "#2f3032",
+                "background": "#f8f6f5",
+                "surface-variant": "#f4ded8",
+                "surface-container-highest": "#e2dfdd",
+                "on-secondary-fixed-variant": "#005234",
+                "on-error-container": "#410002",
+                "surface-container-high": "#e8e5e3",
+                "on-secondary-fixed": "#002114",
+                "outline": "#85736e",
+                "inverse-on-surface": "#f4f0ef",
+                "tertiary-container": "#3e2d28",
+                "surface-container-lowest": "#ffffff",
+                "on-secondary-container": "#064e3b",
+                "surface": "#f8f6f5",
+                "primary-container": "#FE3C06",
+                "on-tertiary-fixed-variant": "#53433f",
+                "on-tertiary-fixed": "#25140f",
+                "tertiary": "#23130f",
+                "on-primary-fixed": "#3a0a00",
+                "tertiary-fixed-dim": "#d3c0ba",
+                "on-secondary": "#ffffff",
+                "surface-tint": "#FE3C06",
+                "secondary": "#10b981",
+                "on-tertiary-container": "#f8f6f5",
+                "on-tertiary": "#ffffff",
+                "error-container": "#ffdad6",
+                "tertiary-fixed": "#f0dbd5",
+                "outline-variant": "#d8c2bc",
+                "primary-fixed": "#ffdad2",
+                "secondary-container": "#d1fae5",
+                "primary": "#FE3C06",
+                "on-primary-fixed-variant": "#931700",
+                "surface-container-low": "#f3f1f0",
+                "error": "#ba1a1a",
+                "on-background": "#1a1c1e"
+        },
+        "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+        },
+        "spacing": {},
+        "fontFamily": {
+                "headline": [
+                        "Plus Jakarta Sans"
+                ],
+                "display": [
+                        "Plus Jakarta Sans"
+                ],
+                "body": [
+                        "Plus Jakarta Sans"
+                ],
+                "label": [
+                        "Plus Jakarta Sans"
+                ]
+        },
+        "fontSize": {}
+},
+    },
+  }
+</script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="text-on-surface flex min-h-screen overflow-hidden" style="background-color: #f9f1ee;">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full pt-16 flex flex-col border-r border-surface-container-highest w-64 z-40 overflow-y-auto no-scrollbar" style="background-color: #f9f1ee;">
+<div class="px-6 py-8">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold">KH</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Kitchen Hub</p>
+</div>
+</div>
+<nav class="space-y-1">
+<div class="flex flex-col gap-1 py-4">
+<!-- Live Orders -->
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">description</span>
+<span class="font-headline font-medium text-sm">Live Orders</span>
+</a>
+<!-- Order Processing -->
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">assignment_late</span>
+<span class="font-headline font-medium text-sm">Kitchen / Packing</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">local_shipping</span>
+<span class="font-headline font-medium text-sm">In Transit</span>
+</a>
+<!-- Inventory (Active State) -->
+<a class="flex items-center gap-4 px-6 py-3 bg-primary text-on-primary rounded-full shadow-lg shadow-primary/20 transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">inventory_2</span>
+<span class="font-headline font-bold text-sm">Inventory</span>
+</a>
+<div class="mt-6 pt-6 border-t border-surface-container-highest/50">
+<div class="bg-white rounded-2xl p-4 shadow-sm border border-surface-container-highest">
+<p class="mb-3 text-[10px] font-black uppercase tracking-widest text-on-surface-variant/40">Live Prep Tally</p>
+<table class="w-full text-xs">
+<tbody class="divide-y divide-surface-container-highest/30">
+<tr class="group">
+<td class="py-2 font-medium text-on-surface-variant">Paneer Tikka</td>
+<td class="py-2 text-right font-bold text-primary border-l border-surface-container-highest/30 pl-3">2</td>
+</tr>
+<tr class="group">
+<td class="py-2 font-medium text-on-surface-variant">Butter Naan</td>
+<td class="py-2 text-right font-bold text-primary border-l border-surface-container-highest/30 pl-3">1</td>
+</tr>
+<tr class="group">
+<td class="py-2 font-medium text-on-surface-variant">Dal Makhani</td>
+<td class="py-2 text-right font-bold text-primary border-l border-surface-container-highest/30 pl-3">1</td>
+</tr>
+<tr class="group">
+<td class="py-2 font-medium text-on-surface-variant">Garlic Naan</td>
+<td class="py-2 text-right font-bold text-primary border-l border-surface-container-highest/30 pl-3">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div></nav>
+</div>
+<div class="mt-auto px-6 py-8 border-t border-surface-container-highest">
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-highest rounded-full transition-all group" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-headline font-medium text-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col h-screen overflow-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-3 backdrop-blur-xl h-16" style="background-color: rgba(249, 241, 238, 0.8);">
+<div class="flex items-center w-1/4">
+<img alt="ORDR.ai Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ugHVi-28Kia4G9qUl4maK6ZHDKTKpV3Y8hJpK1htmqPqkhVK4SO0jkIee_8N1_9hMxZu4hreWDyhiw2lFk27hlBY6Zv3jOjwx4P_F7Ro7djs74-jlUm22Eef2h2k9YzUqAoUPxFyCLKgpQ57Kyi0QYG7snjd7zH738FhM4AjgjfFoCmQH38bhAg14JG5RuK71qWaGhTVqKl5WaBgSSLxhX49Rm06upcAYqYxfIqumqjLddpofd96VcfYTquur3x_A53bq9TJo8R_Q">
+</div>
+<!-- Global Search Bar (Keep unchanged) -->
+<div class="flex-1 flex justify-center px-8">
+<div class="flex items-center bg-surface-container px-6 py-2.5 rounded-full w-full max-w-2xl border border-surface-container-highest shadow-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-xl mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full font-body placeholder:text-on-surface-variant/40" placeholder="Search orders, or menu items..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-6 w-1/4 justify-end">
+<div class="flex items-center gap-3 bg-surface-container-lowest px-4 py-2 rounded-full border border-surface-container-highest">
+<div class="w-2.5 h-2.5 rounded-full bg-[#10b981] animate-pulse"></div>
+<span class="font-headline font-bold text-xs text-on-surface tracking-tight">Accepting Orders</span>
+<button class="w-10 h-5 bg-[#064e3b] rounded-full relative flex items-center px-0.5">
+<div class="w-4 h-4 bg-white rounded-full ml-auto"></div>
+</button>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined hover:text-primary transition-colors cursor-pointer">notifications</span>
+<span class="material-symbols-outlined hover:text-primary transition-colors cursor-pointer">help</span>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest border-2 border-white shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-xl" style="font-variation-settings: &quot;FILL&quot; 1;">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<div class="flex-1 mt-16 flex overflow-hidden">
+<!-- Inventory Management Central Area -->
+<div class="flex-1 p-6 overflow-y-auto no-scrollbar border-r border-surface-container-highest" style="background-color: #f9f1ee;">
+<div class="max-w-4xl mx-auto">
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<div>
+<h1 class="font-headline font-extrabold text-3xl text-on-surface tracking-tight">Inventory Management</h1>
+<p class="text-on-surface-variant text-sm mt-1">Manage global availability of your menu items</p>
+</div>
+<div class="flex gap-2">
+<button class="px-6 py-2.5 bg-primary text-on-primary rounded-full text-sm font-bold shadow-lg shadow-primary/20">Sync All</button>
+</div>
+</div>
+<!-- Large Central Search Bar -->
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant/60 group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-14 pr-6 py-5 bg-surface-container-lowest border-2 border-surface-container-highest rounded-3xl focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all text-lg font-medium placeholder:text-on-surface-variant/30" placeholder="Search item name or category " type="text">
+<div class="absolute inset-y-0 right-4 flex items-center">
+</div>
+</div>
+<!-- Filter Tabs -->
+<div class="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+<button class="px-6 py-2.5 bg-primary text-on-primary rounded-full text-sm font-bold whitespace-nowrap">All Items (42)</button>
+<button class="px-6 py-2.5 bg-surface-container-lowest border border-surface-container-highest text-on-surface-variant rounded-full text-sm font-medium hover:bg-surface-container-high transition-colors whitespace-nowrap">Breakfast</button>
+<button class="px-6 py-2.5 bg-surface-container-lowest border border-surface-container-highest text-on-surface-variant rounded-full text-sm font-medium hover:bg-surface-container-high transition-colors whitespace-nowrap">Main Course</button>
+<button class="px-6 py-2.5 bg-surface-container-lowest border border-surface-container-highest text-on-surface-variant rounded-full text-sm font-medium hover:bg-surface-container-high transition-colors whitespace-nowrap">Sides &amp; Breads</button>
+<button class="px-6 py-2.5 bg-surface-container-lowest border border-surface-container-highest text-on-surface-variant rounded-full text-sm font-medium hover:bg-surface-container-high transition-colors whitespace-nowrap">Beverages</button>
+</div>
+<!-- Comprehensive Food List -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Food Item Card Template -->
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest border border-surface-container-highest rounded-[2rem] hover:shadow-md transition-all group">
+<div class="flex items-center gap-4">
+<div>
+<h4 class="font-headline font-bold text-base text-on-surface">Idli</h4>
+<p class="text-xs text-on-surface-variant/60 font-medium">Breakfast</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-[10px] font-black uppercase tracking-widest text-secondary opacity-0 group-hover:opacity-100 transition-opacity">Available</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-surface-container-highest after:border after:rounded-full after:h-[20px] after:w-[20px] after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest border border-surface-container-highest rounded-[2rem] hover:shadow-md transition-all group">
+<div class="flex items-center gap-4">
+<div>
+<h4 class="font-headline font-bold text-base text-on-surface">Poha</h4>
+<p class="text-xs text-on-surface-variant/60 font-medium">Breakfast</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-surface-container-highest after:border after:rounded-full after:h-[20px] after:w-[20px] after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest border border-surface-container-highest rounded-[2rem] hover:shadow-md transition-all group">
+<div class="flex items-center gap-4">
+<div>
+<h4 class="font-headline font-bold text-base text-on-surface">Samosa</h4>
+<p class="text-xs text-on-surface-variant/60 font-medium">Appetizer</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox">
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-surface-container-highest after:border after:rounded-full after:h-[20px] after:w-[20px] after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest border border-surface-container-highest rounded-[2rem] hover:shadow-md transition-all group">
+<div class="flex items-center gap-4">
+<div>
+<h4 class="font-headline font-bold text-base text-on-surface">Chicken Biryani</h4>
+<p class="text-xs text-on-surface-variant/60 font-medium">Main Course</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-surface-container-highest after:border after:rounded-full after:h-[20px] after:w-[20px] after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest border border-surface-container-highest rounded-[2rem] hover:shadow-md transition-all group">
+<div class="flex items-center gap-4">
+<div>
+<h4 class="font-headline font-bold text-base text-on-surface">Paneer Tikka</h4>
+<p class="text-xs text-on-surface-variant/60 font-medium">Main Course</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-surface-container-highest after:border after:rounded-full after:h-[20px] after:w-[20px] after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest border border-surface-container-highest rounded-[2rem] hover:shadow-md transition-all group">
+<div class="flex items-center gap-4">
+<div>
+<h4 class="font-headline font-bold text-base text-on-surface">Butter Naan</h4>
+<p class="text-xs text-on-surface-variant/60 font-medium">Breads</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-surface-container-highest after:border after:rounded-full after:h-[20px] after:w-[20px] after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest border border-surface-container-highest rounded-[2rem] hover:shadow-md transition-all group">
+<div class="flex items-center gap-4">
+<div>
+<h4 class="font-headline font-bold text-base text-on-surface">Dal Makhani</h4>
+<p class="text-xs text-on-surface-variant/60 font-medium">Main Course</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-surface-container-highest after:border after:rounded-full after:h-[20px] after:w-[20px] after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest border border-surface-container-highest rounded-[2rem] hover:shadow-md transition-all group">
+<div class="flex items-center gap-4">
+<div>
+<h4 class="font-headline font-bold text-base text-on-surface">Garlic Naan</h4>
+<p class="text-xs text-on-surface-variant/60 font-medium">Breads</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-surface-container-highest after:border after:rounded-full after:h-[20px] after:w-[20px] after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest border border-surface-container-highest rounded-[2rem] hover:shadow-md transition-all group">
+<div class="flex items-center gap-4">
+<div>
+<h4 class="font-headline font-bold text-base text-on-surface">Vada Pav</h4>
+<p class="text-xs text-on-surface-variant/60 font-medium">Snacks</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-surface-container-highest after:border after:rounded-full after:h-[20px] after:w-[20px] after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest border border-surface-container-highest rounded-[2rem] hover:shadow-md transition-all group">
+<div class="flex items-center gap-4">
+<div>
+<h4 class="font-headline font-bold text-base text-on-surface">Masala Chai</h4>
+<p class="text-xs text-on-surface-variant/60 font-medium">Beverages</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-surface-container-highest after:border after:rounded-full after:h-[20px] after:w-[20px] after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: Inventory Control -->
+<aside class="w-80 flex flex-col p-6 overflow-y-auto no-scrollbar" style="background-color: #f9f1ee;">
+<div class="mb-8">
+<h3 class="font-headline font-extrabold text-xl text-on-surface mb-2">Quick Stats</h3>
+<p class="text-xs text-on-surface-variant font-body leading-relaxed">System-wide inventory health and stock alerts.</p>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-4 rounded-3xl border border-surface-container-highest">
+<p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant/40 mb-2">Out of Stock</p>
+<div class="flex items-center justify-between">
+<span class="font-headline font-bold text-2xl">03</span>
+<span class="material-symbols-outlined text-error">warning</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-3xl border border-surface-container-highest">
+<p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant/40 mb-2">Total Items</p>
+<div class="flex items-center justify-between">
+<span class="font-headline font-bold text-2xl">42</span>
+<span class="material-symbols-outlined text-primary">inventory</span>
+</div>
+</div>
+<p class="font-headline font-black text-[10px] text-on-surface-variant/40 uppercase tracking-widest mt-6 mb-4"><br></p>
+<div class="flex flex-col gap-2">
+</div>
+</div>
+</aside>
+</div>
+</main>
+
+
+</body></html>

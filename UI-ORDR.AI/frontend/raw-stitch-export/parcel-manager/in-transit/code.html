@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ORDR.ai | Restaurant Food Parcel Manager</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#e0f2f1",
+                        "on-secondary-fixed": "#002109",
+                        "on-primary-fixed-variant": "#8b1b00",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#f5ece6",
+                        "primary-container": "#ff4d21",
+                        "tertiary": "#8d4b00",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ffdcc3",
+                        "tertiary-container": "#b15f00",
+                        "inverse-primary": "#ffb4a3",
+                        "secondary": "#008542",
+                        "surface-container": "#fdf8f5",
+                        "secondary-fixed-dim": "#62df7d",
+                        "outline-variant": "#e8bdb3",
+                        "surface-bright": "#ffffff",
+                        "on-surface-variant": "#5d3f38",
+                        "inverse-surface": "#2f3133",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "surface-variant": "#fdf1ea",
+                        "on-secondary-fixed-variant": "#005320",
+                        "on-background": "#2c2624",
+                        "outline": "#926f66",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#004020",
+                        "on-primary-container": "#fffbff",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#ff4d21",
+                        "surface-container-highest": "#f7e8df",
+                        "on-surface": "#2c2624",
+                        "on-primary": "#ffffff",
+                        "surface": "#fdf6f2",
+                        "background": "#fdf6f2",
+                        "secondary-fixed": "#7ffc97",
+                        "primary-fixed": "#ffdad2",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#2f1500",
+                        "inverse-on-surface": "#fdf6f2",
+                        "surface-tint": "#ff4d21",
+                        "on-primary-fixed": "#3d0700",
+                        "primary-fixed-dim": "#ffb4a3",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-dim": "#f5ece6",
+                        "surface-container-low": "#fdf8f5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full pt-16 flex flex-col border-r border-surface-container-highest bg-surface-variant w-64 z-40 overflow-y-auto no-scrollbar">
+<div class="px-6 py-8">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold">KH</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Kitchen Hub</p>
+</div>
+</div>
+<nav class="space-y-1">
+<div class="flex flex-col gap-1 py-4">
+<!-- Live Orders -->
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">description</span>
+<span class="font-headline font-medium text-sm">Live Orders</span>
+</a>
+<!-- Order Processing (Active State) -->
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">assignment_late</span>
+<span class="font-headline font-medium text-sm">Kitchen / Packing<br/></span>
+</a><a class="flex items-center gap-4 px-6 py-3 bg-primary text-on-primary rounded-full shadow-lg shadow-primary/20 transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">local_shipping</span>
+<span class="font-headline font-bold text-sm">In Transit</span>
+</a>
+<!-- Inventory -->
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">inventory_2</span>
+<span class="font-headline font-medium text-sm">Inventory</span>
+</a>
+</div></nav>
+</div>
+<div class="mt-auto px-6 py-8 border-t border-surface-container-highest">
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-highest rounded-full transition-all group" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-headline font-medium text-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col h-screen overflow-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-3 bg-surface/80 backdrop-blur-xl h-16">
+<div class="flex items-center w-1/4">
+<img alt="ORDR.ai Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ujHLJZjuyq9Ofkj9HPMyw-yVJdXytPHxPUr1Cl4dZP22FAfZjPEg69JbA3MVzOoJ8IHEvIzFyGAYi35Uf9MoOxuwsiJJ3GkehuSHMOXghB0_oElCHWw9Xv_QqUQQSV9I6HHickEMeHxEJMIZtu0viVlsVpeoltV_4R5gCMwqUJv_O9-6wOJ0nxTwXaFqm1sCrnVHWhRAMJ-HxcuNUbJ6CUhIl-ctS1b5UmW4kg_CCUGPw9CHwzzDQnbI3QAkQfyQto7ldQceF5C9tw"/>
+</div>
+<!-- Search Bar -->
+<div class="flex-1 flex justify-center px-8">
+<div class="flex items-center bg-surface-container px-6 py-2.5 rounded-full w-full max-w-2xl border border-surface-container-highest shadow-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-xl mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full font-body placeholder:text-on-surface-variant/40" placeholder="Search orders, or menu items..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6 w-1/4 justify-end">
+<div class="flex items-center gap-3 bg-surface-container-lowest px-4 py-2 rounded-full border border-surface-container-highest">
+<div class="w-2.5 h-2.5 rounded-full bg-[#008542] animate-pulse"></div>
+<span class="font-headline font-bold text-xs text-on-surface tracking-tight">Accepting Orders</span>
+<button class="w-10 h-5 bg-[#005a30] rounded-full relative flex items-center px-0.5">
+<div class="w-4 h-4 bg-white rounded-full ml-auto"></div>
+</button>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined hover:text-primary transition-colors cursor-pointer">notifications</span>
+<span class="material-symbols-outlined hover:text-primary transition-colors cursor-pointer">help</span>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest border-2 border-white shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-xl" style='font-variation-settings: "FILL" 1;'>account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<div class="flex-1 mt-16 flex overflow-hidden">
+<!-- Live Order Pipeline -->
+<div class="flex-1 p-6 overflow-y-auto no-scrollbar bg-surface"><div class="max-w-7xl mx-auto">
+<div class="flex items-center justify-between mb-8 px-2">
+<h2 class="font-headline font-extrabold text-2xl text-on-surface tracking-tight flex items-center gap-3">
+            In Transit
+            <span class="text-sm bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full">9</span>
+</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-12">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-3xl border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-200">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-sm tracking-tight">#ORD-9020</span>
+<span class="material-symbols-outlined text-secondary text-sm" style='font-variation-settings: "FILL" 1;'>local_shipping</span>
+</div>
+<span class="text-on-surface-variant/40 text-[10px] font-bold">DISPATCHED 08:50</span>
+</div>
+<div class="space-y-1 mb-4">
+<p class="text-on-surface text-sm font-medium">2x Poha</p>
+<p class="text-on-surface text-sm font-medium">2x Jalebi</p>
+</div>
+<div class="flex items-center justify-between">
+<button class="bg-[#008542] text-white text-xs font-bold px-6 py-2 rounded-full hover:brightness-110 transition-all">Mark Delivered</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-3xl border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-200">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-sm tracking-tight">#ORD-9021</span>
+<span class="material-symbols-outlined text-secondary text-sm" style='font-variation-settings: "FILL" 1;'>local_shipping</span>
+</div>
+<span class="text-on-surface-variant/40 text-[10px] font-bold">DISPATCHED 08:55</span>
+</div>
+<div class="space-y-1 mb-4">
+<p class="text-on-surface text-sm font-medium">1x Masala Dosa</p>
+<p class="text-on-surface text-sm font-medium">1x Filter Coffee</p>
+</div>
+<div class="flex items-center justify-between">
+<button class="bg-[#008542] text-white text-xs font-bold px-6 py-2 rounded-full hover:brightness-110 transition-all">Mark Delivered</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-5 rounded-3xl border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-200">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-sm tracking-tight">#ORD-9022</span>
+<span class="material-symbols-outlined text-secondary text-sm" style='font-variation-settings: "FILL" 1;'>local_shipping</span>
+</div>
+<span class="text-on-surface-variant/40 text-[10px] font-bold">DISPATCHED 09:02</span>
+</div>
+<div class="space-y-1 mb-4">
+<p class="text-on-surface text-sm font-medium">3x Samosa Pav</p>
+<p class="text-on-surface text-sm font-medium">1x Ginger Tea</p>
+</div>
+<div class="flex items-center justify-between">
+<button class="bg-[#008542] text-white text-xs font-bold px-6 py-2 rounded-full hover:brightness-110 transition-all">Mark Delivered</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest p-5 rounded-3xl border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-200">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-sm tracking-tight">#ORD-9023</span>
+<span class="material-symbols-outlined text-secondary text-sm" style='font-variation-settings: "FILL" 1;'>local_shipping</span>
+</div>
+<span class="text-on-surface-variant/40 text-[10px] font-bold">DISPATCHED 09:10</span>
+</div>
+<div class="space-y-1 mb-4">
+<p class="text-on-surface text-sm font-medium">2x Paneer Paratha</p>
+<p class="text-on-surface text-sm font-medium">1x Curd</p>
+</div>
+<div class="flex items-center justify-between">
+<button class="bg-[#008542] text-white text-xs font-bold px-6 py-2 rounded-full hover:brightness-110 transition-all">Mark Delivered</button>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container-lowest p-5 rounded-3xl border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-200">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-sm tracking-tight">#ORD-9024</span>
+<span class="material-symbols-outlined text-secondary text-sm" style='font-variation-settings: "FILL" 1;'>local_shipping</span>
+</div>
+<span class="text-on-surface-variant/40 text-[10px] font-bold">DISPATCHED 09:15</span>
+</div>
+<div class="space-y-1 mb-4">
+<p class="text-on-surface text-sm font-medium">1x Chole Bhature</p>
+<p class="text-on-surface text-sm font-medium">1x Sweet Lassi</p>
+</div>
+<div class="flex items-center justify-between">
+<button class="bg-[#008542] text-white text-xs font-bold px-6 py-2 rounded-full hover:brightness-110 transition-all">Mark Delivered</button>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface-container-lowest p-5 rounded-3xl border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-200">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-sm tracking-tight">#ORD-9025</span>
+<span class="material-symbols-outlined text-secondary text-sm" style='font-variation-settings: "FILL" 1;'>local_shipping</span>
+</div>
+<span class="text-on-surface-variant/40 text-[10px] font-bold">DISPATCHED 09:22</span>
+</div>
+<div class="space-y-1 mb-4">
+<p class="text-on-surface text-sm font-medium">2x Vada Pav</p>
+<p class="text-on-surface text-sm font-medium">1x Kokum Sherbet</p>
+</div>
+<div class="flex items-center justify-between">
+<button class="bg-[#008542] text-white text-xs font-bold px-6 py-2 rounded-full hover:brightness-110 transition-all">Mark Delivered</button>
+</div>
+</div>
+<!-- Card 7 -->
+<div class="bg-surface-container-lowest p-5 rounded-3xl border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-200">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-sm tracking-tight">#ORD-9026</span>
+<span class="material-symbols-outlined text-secondary text-sm" style='font-variation-settings: "FILL" 1;'>local_shipping</span>
+</div>
+<span class="text-on-surface-variant/40 text-[10px] font-bold">DISPATCHED 09:30</span>
+</div>
+<div class="space-y-1 mb-4">
+<p class="text-on-surface text-sm font-medium">1x Idli Sambhar</p>
+<p class="text-on-surface text-sm font-medium">1x Medu Vada</p>
+</div>
+<div class="flex items-center justify-between">
+<button class="bg-[#008542] text-white text-xs font-bold px-6 py-2 rounded-full hover:brightness-110 transition-all">Mark Delivered</button>
+</div>
+</div>
+<!-- Card 8 -->
+<div class="bg-surface-container-lowest p-5 rounded-3xl border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-200">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-sm tracking-tight">#ORD-9027</span>
+<span class="material-symbols-outlined text-secondary text-sm" style='font-variation-settings: "FILL" 1;'>local_shipping</span>
+</div>
+<span class="text-on-surface-variant/40 text-[10px] font-bold">DISPATCHED 09:35</span>
+</div>
+<div class="space-y-1 mb-4">
+<p class="text-on-surface text-sm font-medium">2x Misal Pav</p>
+<p class="text-on-surface text-sm font-medium">1x Solkadhi</p>
+</div>
+<div class="flex items-center justify-between">
+<button class="bg-[#008542] text-white text-xs font-bold px-6 py-2 rounded-full hover:brightness-110 transition-all">Mark Delivered</button>
+</div>
+</div>
+<!-- Card 9 -->
+<div class="bg-surface-container-lowest p-5 rounded-3xl border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-200">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-sm tracking-tight">#ORD-9028</span>
+<span class="material-symbols-outlined text-secondary text-sm" style='font-variation-settings: "FILL" 1;'>local_shipping</span>
+</div>
+<span class="text-on-surface-variant/40 text-[10px] font-bold">DISPATCHED 09:40</span>
+</div>
+<div class="space-y-1 mb-4">
+<p class="text-on-surface text-sm font-medium">1x Vegetable Biryani</p>
+<p class="text-on-surface text-sm font-medium">1x Raita</p>
+</div>
+<div class="flex items-center justify-between">
+<button class="bg-[#008542] text-white text-xs font-bold px-6 py-2 rounded-full hover:brightness-110 transition-all">Mark Delivered</button>
+</div>
+</div>
+</div>
+</div></div>
+<!-- Right Sidebar: Quick Stock Toggle -->
+</div>
+</main>
+</body></html>
