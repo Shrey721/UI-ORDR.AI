@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Ordr.AI | Dashboard</title>
+    
+    <!-- ============== EXTERNAL DEPENDENCIES ============== -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- ============== UNIFIED TAILWIND CONFIG ============== -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#FE3C06",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#FFEDE8",
+                        "on-primary-container": "#410D00",
+                        "secondary": "#77574E",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#FFDAD1",
+                        "on-secondary-container": "#2C150F",
+                        "tertiary": "#6C5D2F",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#F5E1A7",
+                        "on-tertiary-container": "#231B00",
+                        "error": "#BA1A1A",
+                        "on-error": "#ffffff",
+                        "error-container": "#FFDAD6",
+                        "on-error-container": "#410002",
+                        "background": "#FFF8F6",
+                        "on-background": "#231A17",
+                        "surface": "#FFF8F6",
+                        "on-surface": "#231A17",
+                        "surface-variant": "#F5DED8",
+                        "on-surface-variant": "#53433F",
+                        "outline": "#85736E",
+                        "outline-variant": "#D8C2BC",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#FFF1ED",
+                        "surface-container": "#FCEA6",
+                        "surface-container-high": "#F9E4DF",
+                        "surface-container-highest": "#F4DED9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "9999px",
+                        "lg": "9999px",
+                        "xl": "9999px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+    
+    <!-- ============== UNIFIED GLOBAL STYLES ============== -->
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        /* Tab & Section Management */
+        .dashboard-section {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+        .dashboard-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Sidebar active state */
+        .nav-link.active {
+            background-color: #FE3C06;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+
+<!-- ============== SIDEBAR NAVIGATION ============== -->
+<nav class="fixed left-0 top-0 h-full flex flex-col p-4 z-50 bg-surface-container-low w-64 border-r border-outline-variant/30 font-medium">
+    <div class="flex items-center gap-3 mb-10 px-2">
+        <img alt="Ordr.AI Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ujAiP9zdotqwo0pFux6yABrxAmlMPteaj98RYECOBD3-1BbowUfrjsCExj0r69-UAL8SDEV_Y2GbOKbK65yzs7-pCz319hwu-9KVb4SV_WnU_3v3_AlHFp-UhydYCnEcq0w2-D1wucZlRVZnj23MapmYOqpD8Y6p5rdGU5WJJ8fBXg5eLqM4TpqbMBRTwLij55TpfDE9RcMJ9GgBxNK9OWhkOkhKuEICT1VmWFPFXoitRBQKemYUVmMa9lMyJP8QitTz12Hz_uOng"/>
+    </div>
+    <div class="space-y-1 flex-1">
+        <!-- Command Center -->
+        <button class="nav-link active flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-full transition-all active:scale-95 w-full" data-section="command-center">
+            <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+            <span>Command Center</span>
+        </button>
+        <!-- Menu Management -->
+        <button class="nav-link flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-primary-container/50 rounded-full transition-all active:scale-95 w-full" data-section="menu-management">
+            <span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+            <span>Menu Management</span>
+        </button>
+        <!-- Customer Insights -->
+        <button class="nav-link flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-primary-container/50 rounded-full transition-all active:scale-95 w-full" data-section="customer-insights">
+            <span class="material-symbols-outlined" data-icon="insights">insights</span>
+            <span>Customer Insights</span>
+        </button>
+        <!-- Food Insights -->
+        <button class="nav-link flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-primary-container/50 rounded-full transition-all active:scale-95 w-full" data-section="food-insights">
+            <span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+            <span>Food Insights</span>
+        </button>
+        <!-- Financials -->
+        <button class="nav-link flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-primary-container/50 rounded-full transition-all active:scale-95 w-full" data-section="financials">
+            <span class="material-symbols-outlined" data-icon="payments">payments</span>
+            <span>Financials</span>
+        </button>
+        <!-- Logistic Insights -->
+        <button class="nav-link flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-primary-container/50 rounded-full transition-all active:scale-95 w-full" data-section="logistic">
+            <span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+            <span>Logistic Insights</span>
+        </button>
+        <!-- Outlet Settings -->
+        <button class="nav-link flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-primary-container/50 rounded-full transition-all active:scale-95 w-full" data-section="outlet-settings">
+            <span class="material-symbols-outlined" data-icon="settings">settings</span>
+            <span>Outlet Settings</span>
+        </button>
+    </div>
+    <div class="mt-auto pt-4 border-t-0">
+        <button class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-error hover:bg-error-container/50 rounded-full transition-all active:scale-95 w-full">
+            <span class="material-symbols-outlined" data-icon="logout">logout</span>
+            <span>Logout</span>
+        </button>
+    </div>
+</nav>
+
+<!-- ============== TOP APP BAR ============== -->
+<header class="sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 flex justify-between items-center w-full px-8 h-16 ml-64">
+    <div class="flex items-center gap-6 w-1/2">
+        <div class="relative w-full max-w-md">
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
+            <input class="w-full bg-surface-container-highest border-none rounded-full pl-11 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/40" placeholder="Search orders, customers, or menu items..." type="text"/>
+        </div>
+    </div>
+    <div class="flex items-center gap-4">
+        <button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+            <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+            <span class="material-symbols-outlined">help</span>
+        </button>
+        <div class="h-9 w-9 rounded-full overflow-hidden ml-2 ring-2 ring-primary/20">
+            <img alt="Chef profile" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIC5Em0yGPh1BSY57c1bmzD7ja3TVzHp6_crYgdcbaFlDfbqwPNVyUe6ngbk4y9NH88Zgd08Cri3h2ORJNkinKpcGrspaFwaH6M5o6YVdRBlT6BMHxGdju68dWpuYG6eg6ZgHtbNSPl4CInN7PqtY7PIgWmIwwKC5gKgk3gq7Ql8xNnDGNXs0MY-j3YVwCCtQceMXqoSHt0QTSa4RYuJBde-DiUTnwW_7dyrdC03vPR7LCOT4CQI_mjCICVOk4YI_ssVVcLvtDtIAj"/>
+        </div>
+    </div>
+</header>
+
+<!-- ============== MAIN CONTENT AREA ============== -->
+<main class="ml-64 min-h-screen flex flex-col bg-surface overflow-y-auto no-scrollbar">
+
+    <!-- ======== SECTION 1: COMMAND CENTER ======== -->
+    <section id="command-center" class="dashboard-section active p-8 space-y-8">
+        <!-- Header Section -->
+        <div class="flex justify-between items-end">
+            <div>
+                <h1 class="font-headline text-3xl font-extrabold text-on-surface tracking-tight">Command Center</h1>
+                <p class="text-on-surface-variant font-medium mt-1">Global Outlet Overview</p>
+            </div>
+            <div class="flex items-center gap-3 mr-4 bg-emerald-50 px-4 py-2 rounded-full border border-emerald-100 shadow-sm">
+                <div class="relative inline-flex items-center cursor-pointer">
+                    <input checked="" class="sr-only peer" type="checkbox" value=""/>
+                    <div class="w-10 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500"></div>
+                </div>
+                <span class="text-xs font-bold text-emerald-700 uppercase tracking-tight whitespace-nowrap">Restaurant Accepting Orders</span>
+            </div>
+            <button class="flex items-center gap-2 text-primary font-bold hover:underline">
+                <span class="material-symbols-outlined text-sm">support_agent</span>
+                Raise a Complaint
+            </button>
+        </div>
+
+        <!-- Bento Grid Dashboard -->
+        <div class="grid grid-cols-12 gap-6">
+            <!-- Hero Metric: Active Orders -->
+            <div class="col-span-12 lg:col-span-8 bg-gradient-to-br from-primary to-[#D63000] p-8 rounded-[40px] flex flex-col justify-center h-64 text-on-primary shadow-2xl shadow-primary/20 overflow-hidden relative group">
+                <div class="absolute -right-12 -top-12 h-64 w-64 bg-white/10 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700"></div>
+                <div class="z-10">
+                    <span class="font-label text-xs tracking-widest uppercase opacity-80 font-bold">Real-time Operations</span>
+                    <div class="mt-4 flex items-baseline gap-6">
+                        <span class="font-headline text-8xl font-extrabold tracking-tighter leading-none">4</span>
+                        <div class="flex flex-col">
+                            <span class="text-3xl font-extrabold">Active Orders</span>
+                            <span class="text-sm opacity-90 flex items-center gap-1 font-medium mt-1">
+                                <span class="material-symbols-outlined text-sm">trending_up</span>
+                                +4 in the last 15 mins
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Card -->
+            <div class="col-span-12 lg:col-span-4 flex flex-col">
+                <div class="flex-1 bg-surface-container-lowest p-6 rounded-[32px] shadow-sm border border-outline-variant/30 flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-headline font-bold text-sm text-on-surface-variant uppercase tracking-wider">Performance</h3>
+                        <div class="relative">
+                            <select class="appearance-none bg-surface-container-low text-on-surface pl-4 pr-10 py-1.5 rounded-full text-xs font-bold flex items-center gap-2 hover:bg-surface-container-high transition-colors border border-outline-variant/30 focus:ring-2 focus:ring-primary/20 outline-none cursor-pointer">
+                                <option value="hourly">Hourly</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="month">Month</option>
+                                <option value="yearly">Yearly</option>
+                            </select>
+                            <span class="material-symbols-outlined text-base absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">filter_list</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-surface-container-low rounded-2xl">
+                            <div>
+                                <p class="text-[10px] font-bold text-on-surface-variant uppercase">Total Orders</p>
+                                <p class="text-2xl font-headline font-extrabold">42</p>
+                            </div>
+                            <span class="material-symbols-outlined text-primary/40 text-3xl">receipt_long</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-primary-container/30 rounded-2xl">
+                            <div>
+                                <p class="text-[10px] font-bold text-on-surface-variant uppercase">Revenue</p>
+                                <p class="text-2xl font-headline font-extrabold text-primary">₹8,500</p>
+                            </div>
+                            <span class="material-symbols-outlined text-primary/40 text-3xl">payments</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Flow Management -->
+            <div class="col-span-12 bg-surface-container-lowest rounded-[40px] shadow-sm border border-outline-variant/30 overflow-hidden">
+                <div class="px-8 py-7 flex justify-between items-center bg-white border-b border-outline-variant/10">
+                    <div>
+                        <h2 class="font-headline text-xl font-extrabold">Order Flow Management (Exceptions)</h2>
+                        <p class="text-sm text-on-surface-variant font-medium">Monitoring delayed orders requiring immediate attention</p>
+                    </div>
+                    <button class="bg-error-container/20 text-error px-5 py-2.5 rounded-full text-sm font-bold flex items-center gap-2 hover:bg-error-container/40 transition-colors border border-error/20">
+                        <span class="material-symbols-outlined text-lg">warning</span>
+                        Exceptions | Filter
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-surface-container-low/50">
+                            <tr>
+                                <th class="px-8 py-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Order ID</th>
+                                <th class="px-8 py-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Customer</th>
+                                <th class="px-8 py-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Items</th>
+                                <th class="px-8 py-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Value</th>
+                                <th class="px-8 py-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Status</th>
+                                <th class="px-8 py-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">TIME</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant/10">
+                            <tr class="bg-error-container/5 hover:bg-error-container/10 transition-colors">
+                                <td class="px-8 py-6"><span class="font-bold text-sm text-on-surface">#ORD-9021</span></td>
+                                <td class="px-8 py-6"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-primary-container text-primary flex items-center justify-center font-bold text-xs">JD</div><div class="text-sm font-extrabold text-on-surface">John Doe</div></div></td>
+                                <td class="px-8 py-6"><span class="text-sm text-on-surface-variant font-medium">3x Wagyu Burger...</span></td>
+                                <td class="px-8 py-6"><span class="text-sm font-extrabold text-on-surface">₹1,240.50</span></td>
+                                <td class="px-8 py-6"><div class="flex flex-col gap-1"><span class="px-4 py-1.5 bg-primary-container text-primary rounded-full text-[10px] font-extrabold uppercase tracking-wider w-max">Pending</span><span class="text-[9px] text-error font-extrabold uppercase tracking-tighter">Overdue 24m</span></div></td>
+                                <td class="px-8 py-6"><div class="flex flex-col"><span class="text-sm font-bold text-error">09:30</span><span class="text-[10px] font-extrabold text-error/60">DELAYED</span></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Revenue Trend -->
+            <div class="col-span-12 lg:col-span-9 bg-surface-container-lowest p-8 rounded-[40px] shadow-sm border border-outline-variant/30">
+                <div class="flex justify-between items-center mb-10">
+                    <div>
+                        <h3 class="font-headline font-extrabold text-xl">Revenue Trend</h3>
+                        <p class="text-sm text-on-surface-variant font-medium">Financial performance analytics</p>
+                    </div>
+                    <div class="flex bg-surface-container-low rounded-full p-1 gap-1 shadow-inner">
+                        <button class="px-4 py-1.5 bg-white shadow-sm rounded-full text-[11px] font-bold text-primary">Revenue Trend</button>
+                        <button class="px-4 py-1.5 text-on-surface-variant text-[11px] font-bold hover:bg-white/50 rounded-full">Order Volume</button>
+                        <button class="px-4 py-1.5 text-on-surface-variant text-[11px] font-bold hover:bg-white/50 rounded-full">Avg. Ticket</button>
+                    </div>
+                </div>
+                <div class="flex h-56 mt-auto">
+                    <div class="flex flex-col justify-between text-[10px] font-bold text-on-surface-variant/50 pr-4 pb-8">
+                        <span>₹10,000</span>
+                        <span>₹7,500</span>
+                        <span>₹5,000</span>
+                        <span>₹2,500</span>
+                        <span>0</span>
+                    </div>
+                    <div class="flex-1 flex flex-col">
+                        <div class="flex-1 flex items-end justify-between px-2 gap-4">
+                            <div class="w-full group relative h-[40%]"><div class="absolute inset-x-0 bottom-0 bg-primary/20 rounded-t-2xl h-[60%] hover:bg-primary transition-all"></div></div>
+                            <div class="w-full group relative h-[60%]"><div class="absolute inset-x-0 bottom-0 bg-primary/20 rounded-t-2xl h-[45%] hover:bg-primary transition-all"></div></div>
+                            <div class="w-full group relative h-[80%]"><div class="absolute inset-x-0 bottom-0 bg-primary/20 rounded-t-2xl h-[90%] hover:bg-primary transition-all"></div></div>
+                            <div class="w-full group relative h-[100%]"><div class="absolute inset-x-0 bottom-0 bg-primary rounded-t-2xl h-[75%]"></div></div>
+                            <div class="w-full group relative h-[70%]"><div class="absolute inset-x-0 bottom-0 bg-primary/20 rounded-t-2xl h-[30%] hover:bg-primary transition-all"></div></div>
+                            <div class="w-full group relative h-[55%]"><div class="absolute inset-x-0 bottom-0 bg-primary/20 rounded-t-2xl h-[50%] hover:bg-primary transition-all"></div></div>
+                            <div class="w-full group relative h-[90%]"><div class="absolute inset-x-0 bottom-0 bg-primary/20 rounded-t-2xl h-[65%] hover:bg-primary transition-all"></div></div>
+                        </div>
+                        <div class="flex justify-between px-2 mt-4">
+                            <span class="w-full text-center text-[10px] font-bold text-on-surface-variant/70 uppercase tracking-tighter">Mon</span>
+                            <span class="w-full text-center text-[10px] font-bold text-on-surface-variant/70 uppercase tracking-tighter">Tue</span>
+                            <span class="w-full text-center text-[10px] font-bold text-on-surface-variant/70 uppercase tracking-tighter">Wed</span>
+                            <span class="w-full text-center text-[10px] font-bold text-on-surface-variant/70 uppercase tracking-tighter">Thu</span>
+                            <span class="w-full text-center text-[10px] font-bold text-on-surface-variant/70 uppercase tracking-tighter">Fri</span>
+                            <span class="w-full text-center text-[10px] font-bold text-on-surface-variant/70 uppercase tracking-tighter">Sat</span>
+                            <span class="w-full text-center text-[10px] font-bold text-on-surface-variant/70 uppercase tracking-tighter">Sun</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Health -->
+            <div class="col-span-12 lg:col-span-3">
+                <div class="bg-surface-container-lowest p-6 rounded-[32px] shadow-sm border border-outline-variant/30">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-headline font-bold text-sm uppercase tracking-wider text-on-surface-variant">System Health</h3>
+                        <div class="flex items-center gap-1.5 px-2 py-0.5 bg-primary-container text-primary rounded-full">
+                            <span class="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></span>
+                            <span class="text-[9px] font-extrabold uppercase tracking-wider">OK</span>
+                        </div>
+                    </div>
+                    <div class="space-y-6 flex-1 flex flex-col justify-center">
+                        <div>
+                            <div class="flex justify-between text-[10px] mb-2 font-bold uppercase text-on-surface-variant">
+                                <span>Response Time</span>
+                                <span>1.2s</span>
+                            </div>
+                            <div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+                                <div class="h-full bg-primary w-[25%] rounded-full"></div>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-on-surface-variant font-medium leading-relaxed italic border-l-2 border-primary/20 pl-3">
+                            "AI Agents operating within optimal parameters."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======== SECTION 2: MENU MANAGEMENT ======== -->
+    <section id="menu-management" class="dashboard-section p-8">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h1 class="text-3xl font-extrabold tracking-tighter text-on-surface">Menu Management</h1>
+                <p class="text-on-surface/60 mt-1">Manage your dishes, availability, and seasonal items</p>
+            </div>
+            <div class="flex gap-3">
+                <button class="px-6 py-2.5 border-2 border-primary/20 text-primary font-bold rounded-full hover:bg-white transition-all text-sm">
+                    Upload Menu
+                </button>
+                <button class="px-6 py-2.5 bg-[#FF4E17] text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">add</span>
+                    Add New Item
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Management Content -->
+        <div class="bg-white rounded-2xl p-8 mb-8 shadow-sm">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-secondary-container flex items-center justify-center text-[#00BD40]">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-on-surface">Menu Source</h3>
+                    <p class="text-sm text-on-surface/50">Auto-sync your physical menu using AI</p>
+                </div>
+            </div>
+            <div class="border-2 border-dashed border-primary/10 rounded-2xl p-10 flex flex-col items-center justify-center bg-background/50 hover:bg-background transition-colors cursor-pointer group">
+                <span class="material-symbols-outlined text-4xl text-on-surface/20 group-hover:text-primary transition-colors mb-3">cloud_upload</span>
+                <p class="text-on-surface/80 font-medium">Drag and drop your menu PDF or CSV</p>
+                <p class="text-xs text-on-surface/40 mt-1 italic">Menu items will be auto-extracted and categorized instantly.</p>
+            </div>
+        </div>
+
+        <!-- Menu Table -->
+        <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+            <div class="p-6 flex items-center gap-4 flex-wrap border-b border-on-surface/5">
+                <div class="relative flex-1 min-w-[240px]">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface/40 text-[20px]">search</span>
+                    <input class="w-full bg-transparent border-0 border-b border-on-surface/10 focus:ring-0 focus:border-primary text-sm pl-10 pb-2" placeholder="Search menu items..." type="text"/>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-background/40">
+                        <tr>
+                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface/40">Item Name</th>
+                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface/40">Category</th>
+                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface/40 text-right">Price (₹)</th>
+                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface/40">Status</th>
+                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface/40 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-on-surface/5">
+                        <tr class="hover:bg-background/20 transition-colors cursor-pointer group">
+                            <td class="px-6 py-5"><span class="font-bold text-on-surface">Mango Lassi</span></td>
+                            <td class="px-6 py-5 text-sm text-on-surface/70">Beverages</td>
+                            <td class="px-6 py-5 text-sm font-bold text-right">180.00</td>
+                            <td class="px-6 py-5"><span class="px-3 py-1 bg-[#FFDCD3] text-[#8b1b00] text-[10px] font-extrabold uppercase rounded-full">Active</span></td>
+                            <td class="px-6 py-5 text-right"><button class="w-8 h-8 rounded-full hover:bg-background flex items-center justify-center"><span class="material-symbols-outlined text-on-surface/40 group-hover:text-primary">edit</span></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======== SECTION 3: CUSTOMER INSIGHTS ======== -->
+    <section id="customer-insights" class="dashboard-section p-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <div>
+                <h2 class="text-3xl font-extrabold font-headline text-on-surface tracking-tight">Customer Intelligence</h2>
+                <p class="text-on-surface-variant text-sm font-medium mt-1">Deep dive into your customer behavioral patterns.</p>
+            </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-2xl flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-white/60">
+                <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Total Unique</span>
+                <div class="mt-4">
+                    <p class="text-2xl font-extrabold font-headline">12,482</p>
+                    <div class="flex items-center gap-1 text-primary mt-1.5">
+                        <span class="material-symbols-outlined text-[14px]">trending_up</span>
+                        <span class="text-[11px] font-bold">+12.4%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-white/60">
+                <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Net New</span>
+                <div class="mt-4">
+                    <p class="text-2xl font-extrabold font-headline">843</p>
+                    <div class="flex items-center gap-1 text-primary mt-1.5">
+                        <span class="material-symbols-outlined text-[14px]">trending_up</span>
+                        <span class="text-[11px] font-bold">+5.2%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-white/60">
+                <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Returning %</span>
+                <div class="mt-4">
+                    <p class="text-2xl font-extrabold font-headline">64.2%</p>
+                    <div class="flex items-center gap-1 text-error mt-1.5">
+                        <span class="material-symbols-outlined text-[14px]">trending_down</span>
+                        <span class="text-[11px] font-bold">-2.1%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-white/60">
+                <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Regulars</span>
+                <div class="mt-4">
+                    <p class="text-2xl font-extrabold font-headline">3,120</p>
+                    <div class="flex items-center gap-1 text-primary mt-1.5">
+                        <span class="material-symbols-outlined text-[14px]">trending_up</span>
+                        <span class="text-[11px] font-bold">+8.9%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-white/60">
+                <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Avg Items</span>
+                <div class="mt-4">
+                    <p class="text-2xl font-extrabold font-headline">4.2</p>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-white/60">
+                <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Avg Order ₹</span>
+                <div class="mt-4">
+                    <p class="text-2xl font-extrabold font-headline">1,840</p>
+                    <div class="flex items-center gap-1 text-primary mt-1.5">
+                        <span class="material-symbols-outlined text-[14px]">trending_up</span>
+                        <span class="text-[11px] font-bold">+15.2%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Table -->
+        <div class="bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.02)] border border-white/60 overflow-hidden">
+            <div class="p-8 border-b border-surface-container">
+                <h3 class="font-extrabold font-headline text-lg">Detailed Customer Breakdown</h3>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-surface-container/30">
+                        <tr>
+                            <th class="px-8 py-5 text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant">Customer</th>
+                            <th class="px-8 py-5 text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant">Orders</th>
+                            <th class="px-8 py-5 text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant">Total Spend (₹)</th>
+                            <th class="px-8 py-5 text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant">Avg Value</th>
+                            <th class="px-8 py-5 text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-surface-container">
+                        <tr class="hover:bg-surface-container/20 transition-colors cursor-pointer">
+                            <td class="px-8 py-6"><div class="flex items-center gap-4"><div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-xs font-extrabold text-primary">AS</div><span class="text-sm font-bold text-on-surface">Aarav Sharma</span></div></td>
+                            <td class="px-8 py-6 text-sm font-medium">42</td>
+                            <td class="px-8 py-6 text-sm font-bold text-primary">₹84,200</td>
+                            <td class="px-8 py-6 text-sm font-medium text-on-surface-variant">₹2,004</td>
+                            <td class="px-8 py-6"><span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-[10px] font-extrabold uppercase tracking-widest">Active</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======== SECTION 4: FOOD INSIGHTS ======== -->
+    <section id="food-insights" class="dashboard-section p-8">
+        <div class="flex items-end justify-between mb-8">
+            <div>
+                <h2 class="text-4xl font-black tracking-tight text-on-surface">Food Insights</h2>
+                <p class="text-on-surface-variant font-medium mt-1">Detailed performance metrics for your kitchen ecosystem.</p>
+            </div>
+            <button class="bg-primary text-on-primary px-5 py-2 rounded-lg font-bold text-sm flex items-center gap-2 active:scale-95 transition-all shadow-lg shadow-primary/20">
+                <span class="material-symbols-outlined text-sm">file_download</span>
+                Export Report
+            </button>
+        </div>
+
+        <!-- KPI Row -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+            <div class="bg-white border border-surface-variant/50 rounded-xl p-6 relative overflow-hidden group">
+                <p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant/60 mb-2">Total Orders</p>
+                <h3 class="text-3xl font-black text-on-surface">1,284</h3>
+                <div class="mt-2 flex items-center gap-1 text-secondary font-bold text-xs">
+                    <span class="material-symbols-outlined text-xs">trending_up</span>
+                    <span>+12.4%</span>
+                </div>
+            </div>
+            <div class="bg-white border border-surface-variant/50 rounded-xl p-6">
+                <p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant/60 mb-2">Gross Revenue</p>
+                <h3 class="text-3xl font-black text-on-surface">₹425k</h3>
+                <div class="mt-2 flex items-center gap-1 text-secondary font-bold text-xs">
+                    <span class="material-symbols-outlined text-xs">trending_up</span>
+                    <span>+8.1%</span>
+                </div>
+            </div>
+            <div class="bg-primary rounded-xl p-6">
+                <p class="text-xs font-bold uppercase tracking-wider text-on-primary/60 mb-2">Most Ordered</p>
+                <h3 class="text-2xl font-black text-on-primary">Paneer Tikka</h3>
+                <p class="text-on-primary/80 text-xs mt-1 font-medium">342 units sold</p>
+            </div>
+            <div class="bg-white border border-surface-variant/50 rounded-xl p-6">
+                <p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant/60 mb-2">Avg. Prep Time</p>
+                <h3 class="text-3xl font-black text-on-surface">14.2m</h3>
+                <div class="mt-2 flex items-center gap-1 text-primary font-bold text-xs">
+                    <span class="material-symbols-outlined text-xs">timer</span>
+                    <span>-2.1m improvement</span>
+                </div>
+            </div>
+            <div class="bg-white border border-surface-variant/50 rounded-xl p-6">
+                <p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant/60 mb-2">Top Value Order</p>
+                <h3 class="text-3xl font-black text-on-surface">₹12,450</h3>
+            </div>
+        </div>
+
+        <!-- Menu Performance Table -->
+        <div class="bg-white border border-surface-variant/50 rounded-xl overflow-hidden">
+            <div class="p-8 flex items-center justify-between">
+                <h4 class="text-xl font-black text-on-surface">Menu Performance Breakdown</h4>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-surface-container-highest/50 border-b border-surface-variant/30">
+                        <tr>
+                            <th class="px-8 py-4 text-xs font-black uppercase tracking-widest text-on-surface-variant/60">Item Name</th>
+                            <th class="px-8 py-4 text-xs font-black uppercase tracking-widest text-on-surface-variant/60">Category</th>
+                            <th class="px-8 py-4 text-xs font-black uppercase tracking-widest text-on-surface-variant/60">Orders</th>
+                            <th class="px-8 py-4 text-xs font-black uppercase tracking-widest text-on-surface-variant/60">Revenue (₹)</th>
+                            <th class="px-8 py-4 text-xs font-black uppercase tracking-widest text-on-surface-variant/60">Avg. Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-surface-variant/20">
+                        <tr class="group hover:bg-surface-variant/10 transition-colors">
+                            <td class="px-8 py-6 font-bold text-on-surface">Paneer Tikka</td>
+                            <td class="px-8 py-6 text-on-surface-variant text-sm font-medium">Appetizers</td>
+                            <td class="px-8 py-6 text-on-surface text-sm font-bold">1,420</td>
+                            <td class="px-8 py-6 text-on-surface text-sm font-bold">₹284,000</td>
+                            <td class="px-8 py-6"><div class="flex items-center gap-1"><span class="material-symbols-outlined text-primary text-sm" style='font-variation-settings: "FILL" 1;'>star</span><span class="text-sm font-bold">4.8</span></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======== SECTION 5: FINANCIALS ======== -->
+    <section id="financials" class="dashboard-section p-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+                <h2 class="text-3xl font-extrabold font-headline tracking-tight text-on-surface">Financials &amp; Payouts</h2>
+                <p class="text-on-surface-variant mt-1 text-sm">Track earnings, settlements, and manage your restaurant's cash flow in real-time.</p>
+            </div>
+            <button class="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-xl font-semibold shadow-lg shadow-primary/20 hover:opacity-90 transition-all">
+                <span class="material-symbols-outlined text-lg">download</span>
+                Download Report
+            </button>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10 lg:grid-cols-3">
+            <div class="bg-white p-6 rounded-2xl shadow-[0px_4px_24px_rgba(254,60,6,0.04)] border border-primary/5">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Current Earnings</span>
+                    <span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg">account_balance_wallet</span>
+                </div>
+                <h3 class="text-2xl font-bold font-headline">₹12,450.80</h3>
+                <div class="flex items-center gap-1 text-xs text-primary mt-2 font-medium">
+                    <span class="material-symbols-outlined text-sm">trending_up</span>
+                    <span>12% vs last month</span>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-[0px_4px_24px_rgba(254,60,6,0.04)] border border-primary/5">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Today's Revenue</span>
+                    <span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg">payments</span>
+                </div>
+                <h3 class="text-2xl font-bold font-headline">₹1,204.00</h3>
+                <div class="flex items-center gap-1 text-xs text-primary mt-2 font-medium">
+                    <span class="material-symbols-outlined text-sm">schedule</span>
+                    <span>Live updating</span>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-[0px_4px_24px_rgba(254,60,6,0.04)] border border-primary/5">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Average Order Value</span>
+                    <span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg">shopping_bag</span>
+                </div>
+                <h3 class="text-2xl font-bold font-headline">₹420.50</h3>
+                <div class="flex items-center gap-1 text-xs text-primary mt-2 font-medium">
+                    <span class="material-symbols-outlined text-sm">trending_up</span>
+                    <span>5% vs last week</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transaction Overview -->
+        <div class="bg-white p-8 rounded-2xl shadow-[0px_4px_24px_rgba(254,60,6,0.04)] border border-primary/5 mb-10">
+            <h3 class="text-lg font-bold font-headline mb-8">Transaction Overview</h3>
+            <div class="relative h-64 w-full">
+                <div class="absolute inset-0 flex items-end justify-between gap-2">
+                    <div class="w-full bg-primary/5 rounded-t-lg h-[30%]"></div>
+                    <div class="w-full bg-primary/5 rounded-t-lg h-[45%]"></div>
+                    <div class="w-full bg-primary/10 rounded-t-lg h-[40%]"></div>
+                    <div class="w-full bg-primary/20 rounded-t-lg h-[65%]"></div>
+                    <div class="w-full bg-primary/40 rounded-t-lg h-[55%]"></div>
+                    <div class="w-full bg-primary/60 rounded-t-lg h-[85%]"></div>
+                    <div class="w-full bg-primary rounded-t-lg h-[75%]"></div>
+                </div>
+            </div>
+            <div class="flex justify-between mt-4 text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">
+                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+            </div>
+        </div>
+
+        <!-- Recent Settlements Table -->
+        <div class="bg-white rounded-2xl shadow-[0px_4px_24px_rgba(254,60,6,0.04)] border border-primary/5 overflow-hidden">
+            <div class="px-8 py-6 border-b border-primary/5">
+                <h3 class="text-lg font-bold font-headline">Transaction Overview</h3>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-background/50">
+                        <tr>
+                            <th class="px-8 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Order</th>
+                            <th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Date</th>
+                            <th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Transaction ID</th>
+                            <th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Amount</th>
+                            <th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-primary/5">
+                        <tr class="hover:bg-background/40 transition-colors">
+                            <td class="px-8 py-4"><span class="text-sm font-medium text-on-surface">#ORD-92834</span></td>
+                            <td class="px-4 py-4 text-sm text-on-surface-variant">Oct 20, 2023</td>
+                            <td class="px-4 py-4 text-sm text-on-surface-variant">#TXN-42</td>
+                            <td class="px-4 py-4 font-semibold text-on-surface">₹1,450.00</td>
+                            <td class="px-4 py-4"><span class="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">Completed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======== SECTION 6: LOGISTIC INSIGHTS ======== -->
+    <section id="logistic" class="dashboard-section p-8">
+        <div class="text-center py-20">
+            <h2 class="text-3xl font-extrabold">Logistic Insights</h2>
+            <p class="text-on-surface-variant mt-2">Delivery & logistics dashboard coming soon.</p>
+        </div>
+    </section>
+
+    <!-- ======== SECTION 7: OUTLET SETTINGS ======== -->
+    <section id="outlet-settings" class="dashboard-section p-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+            <div>
+                <h2 class="text-3xl font-extrabold tracking-tight text-on-surface font-headline">Outlet Profile &amp; Settings</h2>
+                <p class="text-on-surface-variant mt-1 font-medium">Manage restaurant details, operations, messaging, and health</p>
+            </div>
+            <button class="px-8 py-3 bg-primary text-white rounded-xl font-bold text-sm shadow-lg shadow-primary/20 hover:opacity-90 transition-all flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">save</span>
+                Save Changes
+            </button>
+        </div>
+
+        <!-- Status Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-2xl shadow-lg flex items-center gap-5">
+                <div class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">chat</span>
+                </div>
+                <div>
+                    <p class="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant">WhatsApp API</p>
+                    <div class="flex items-center gap-2">
+                        <span class="text-lg font-bold">Connected</span>
+                        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg flex items-center gap-5">
+                <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                    <span class="material-symbols-outlined text-2xl">sensors</span>
+                </div>
+                <div>
+                    <p class="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant">System Status</p>
+                    <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-full text-[10px] font-bold uppercase tracking-tight">ONLINE</span>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col justify-between">
+                <div class="flex items-center justify-between">
+                    <p class="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant leading-none">Restaurant Status</p>
+                </div>
+                <div class="mt-4">
+                    <p class="text-lg font-extrabold text-primary">Live &amp; Open</p>
+                    <p class="text-[11px] text-on-surface-variant">Closes at 11:30 PM IST</p>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg">
+                <p class="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant leading-none mb-2">Profile Health</p>
+                <p class="text-lg font-bold">Pending GST</p>
+                <p class="text-[11px] text-primary font-medium">Add FSSAI Details</p>
+            </div>
+        </div>
+
+        <!-- Settings Sections -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <section class="bg-white p-8 rounded-2xl shadow-lg">
+                <h3 class="text-lg font-bold mb-6 font-headline flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">storefront</span>
+                    Business Identity
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1.5 block">Restaurant Name</label>
+                        <input class="px-4 py-3 bg-surface-container-low border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20 font-medium w-full" type="text" value="Royal Spice Kitchen"/>
+                    </div>
+                    <div>
+                        <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1.5 block">Business Phone</label>
+                        <input class="px-4 py-3 bg-surface-container-low border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20 font-medium w-full" type="tel" value="+91 80 4965 1234"/>
+                    </div>
+                    <div>
+                        <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1.5 block">Business Email</label>
+                        <input class="px-4 py-3 bg-surface-container-low border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20 font-medium w-full" type="email" value="contact@royalspiceblr.com"/>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white p-8 rounded-2xl shadow-lg">
+                <h3 class="text-lg font-bold mb-6 font-headline flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">verified_user</span>
+                    Compliance
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1.5 block">FSSAI License</label>
+                        <input class="px-4 py-3 bg-surface-container-low border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20 font-medium w-full" type="text" placeholder="Enter FSSAI License"/>
+                    </div>
+                    <div>
+                        <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1.5 block">GSTIN</label>
+                        <input class="px-4 py-3 bg-surface-container-low border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20 font-medium w-full uppercase" type="text" value="29AAAAA0000A1Z5"/>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <!-- Bottom Spacer -->
+    <div class="h-16 w-full"></div>
+
+</main>
+
+<!-- ============== JAVASCRIPT FOR SECTION SWITCHING ============== -->
+<script>
+    // Section navigation functionality
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const sectionId = this.getAttribute('data-section');
+            
+            // Hide all sections
+            document.querySelectorAll('.dashboard-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('text-on-surface-variant', 'hover:text-primary', 'hover:bg-primary-container/50');
+                btn.classList.remove('bg-primary', 'text-on-primary');
+            });
+            
+            // Show selected section
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+            }
+            
+            // Add active class to clicked nav link
+            this.classList.add('active', 'bg-primary', 'text-on-primary');
+            this.classList.remove('text-on-surface-variant', 'hover:text-primary', 'hover:bg-primary-container/50');
+        });
+    });
+
+    // Optional: Add keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey || e.metaKey) {
+            // Ctrl/Cmd+1 = Command Center, etc.
+            const sectionMap = {
+                '1': 'command-center',
+                '2': 'menu-management',
+                '3': 'customer-insights',
+                '4': 'food-insights',
+                '5': 'financials',
+                '6': 'logistic',
+                '7': 'outlet-settings'
+            };
+            
+            if (sectionMap[e.key]) {
+                const button = document.querySelector(`[data-section="${sectionMap[e.key]}"]`);
+                if (button) button.click();
+            }
+        }
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('button, a').forEach(el => {
+        if (el.getAttribute('data-section')) {
+            el.style.cursor = 'pointer';
+        }
+    });
+</script>
+
+</body>
+</html>
