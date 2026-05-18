@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Financials &amp; Payouts | Ordr.AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#FE3C06",
+                    "on-primary": "#ffffff",
+                    "background": "#FFF5F2",
+                    "surface": "#FFF5F2",
+                    "surface-container": "#FFFFFF",
+                    "on-surface": "#191c1d",
+                    "on-surface-variant": "#3c4a42",
+                    "outline-variant": "#bbcabf"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1rem",
+                    "2xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Sidebar Navigation -->
+<aside class="h-full w-64 fixed left-0 top-0 flex flex-col h-screen py-6 px-4 bg-background font-['Manrope'] font-semibold tracking-tight border-r border-primary/5">
+<div class="mb-10 px-2">
+<img alt="Ordr.AI Logo" class="w-auto object-contain h-12" src="https://lh3.googleusercontent.com/aida/ADBb0uh2k5yKMFPmOn__2nelgGfFXDNePHzeklA25fg0D_2JFDBQdrVUbUZHrP3dmBvIdke2sXfYPEhTqYuRTkvUw8isEfT2sk66B1uHluAP67CnsTXYNV02rLdU8_clzQ0IgcR2CrKQH5b1aPmIQ_rXWE1Y4tMZeYsHYIkV1YgAqQx2vVoDPAUp1Ssa3pwQWC2PbUq73Vjkqy0K4E0BKXO_4GUVfDprVNVXSuA_Zyr87ToZlkNyX5bzc5iTiF0PqNizzR76MuxWmFQg6t0"/>
+</div>
+<nav class="flex-1 space-y-0.5">
+<a class="flex items-center gap-3 px-4 text-slate-500 hover:bg-white/50 transition-colors rounded-lg group py-1.5" href="#">
+<span class="material-symbols-outlined text-lg text-black">grid_view</span>
+<span class="">Command Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 text-slate-500 hover:bg-white/50 transition-colors rounded-lg group py-1.5" href="#">
+<span class="material-symbols-outlined text-lg text-black">restaurant_menu</span>
+<span class="">Menu Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 text-slate-500 hover:bg-white/50 transition-colors rounded-lg group py-1.5" href="#">
+<span class="material-symbols-outlined text-lg text-black">person_search</span>
+<span class="">Customer Insights</span>
+</a>
+<a class="flex items-center gap-3 px-4 text-slate-500 hover:bg-white/50 transition-colors rounded-lg group py-1.5" href="#">
+<span class="material-symbols-outlined text-lg text-black">restaurant</span>
+<span class="">Food Insights</span>
+</a>
+<a class="flex items-center gap-3 px-4 bg-primary text-white rounded-lg shadow-md shadow-primary/20 py-1.5" href="#">
+<span class="material-symbols-outlined text-lg">payments</span>
+<span class="">Financials</span>
+</a>
+<a class="flex items-center gap-3 px-4 text-slate-500 hover:bg-white/50 transition-colors rounded-lg group py-1.5" href="#">
+<span class="material-symbols-outlined text-lg text-black">local_shipping</span>
+<span class="">Logistic Insights</span>
+</a>
+<a class="flex items-center gap-3 px-4 text-slate-500 hover:bg-white/50 transition-colors rounded-lg group py-1.5" href="#">
+<span class="material-symbols-outlined text-lg text-black">settings</span>
+<span class="">Outlet Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/10 space-y-0.5">
+<a class="flex items-center gap-3 px-4 text-slate-500 hover:bg-white/50 transition-colors rounded-lg py-1.5" href="#">
+<span class="material-symbols-outlined text-lg text-black">logout</span>
+<span class="">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] flex justify-between items-center px-8 h-16 ml-64 bg-background/80 backdrop-blur-md z-10">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full border border-primary/10 rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all focus:border-primary/30" placeholder="Search transactions, IDs, or dates..." style="background-color: #EBD9D2;" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative text-on-surface-variant hover:text-primary transition-all flex items-center">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full border-2 border-background"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-all flex items-center">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="flex items-center pl-4 border-l border-outline-variant/20">
+<img alt="User Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiD36SE0Sc15xjhRQhx8jlTgahSjBMlUOIeLbV3twOh7IZ6VnvudfQnUqXYsWsL3-1gB1MNiIfzerhLHCrUTKIwVhRI9eqaFIZ0inWZM02ufO26Yo95xaXr8wWbF9tyBpTIhjWs0s97Q0gxi0BTOKZA3R5m9hwbTq9r2swH1GR2xLsVmPURZuEX72s0dF2iZWarxFrDEOAUWgw92kz-xqceR0YDyL4AzNdKFegHMuNs6YI1HBX1fxhqEkWHVznvW19GvSG4O1Kzjz6"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 pt-24 px-8 pb-12 min-h-screen">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div>
+<h2 class="text-3xl font-extrabold font-headline tracking-tight text-on-surface">Financials &amp; Payouts</h2>
+<p class="text-on-surface-variant mt-1 text-sm">Track earnings, settlements, and manage your restaurant's cash flow in real-time.</p>
+</div>
+<button class="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-xl font-semibold shadow-lg shadow-primary/20 hover:opacity-90 transition-all scale-98 active:scale-95">
+<span class="material-symbols-outlined text-lg">download</span>
+<span class="">Download Report</span>
+</button>
+</div>
+<!-- Summary Cards Bento Grid -->
+<div class="flex items-center gap-1 mb-8 bg-white p-1 rounded-full border border-primary/5 w-fit shadow-sm">
+<button class="px-6 py-2 text-xs font-bold bg-[#FE3C06] text-white rounded-full transition-all">Week</button>
+<button class="px-6 py-2 text-xs font-semibold text-on-surface-variant hover:bg-slate-100 rounded-full transition-all">Month</button>
+<button class="px-6 py-2 text-xs font-semibold text-on-surface-variant hover:bg-slate-100 rounded-full transition-all">Quarter</button>
+<button class="px-6 py-2 text-xs font-semibold text-on-surface-variant hover:bg-slate-100 rounded-full transition-all">Year</button>
+<div class="h-4 w-px bg-outline-variant/20 mx-1"></div>
+<button class="flex items-center gap-2 px-6 py-2 text-xs font-semibold text-on-surface-variant hover:bg-slate-100 rounded-full transition-all">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+    Custom Date
+  </button>
+</div><div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10 lg:grid-cols-3">
+<div class="bg-white p-6 rounded-2xl shadow-[0px_4px_24px_rgba(254,60,6,0.04)] border border-primary/5">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Current Earnings</span>
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg">account_balance_wallet</span>
+</div>
+<h3 class="text-2xl font-bold font-headline">₹12,450.80</h3>
+<div class="flex items-center gap-1 text-xs text-primary mt-2 font-medium">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="">12% vs last month</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-2xl shadow-[0px_4px_24px_rgba(254,60,6,0.04)] border border-primary/5">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Today's Revenue</span>
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg">payments</span>
+</div>
+<h3 class="text-2xl font-bold font-headline">₹1,204.00</h3>
+<div class="flex items-center gap-1 text-xs text-primary mt-2 font-medium">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="">Live updating</span>
+</div>
+</div><div class="bg-white p-6 rounded-2xl shadow-[0px_4px_24px_rgba(254,60,6,0.04)] border border-primary/5">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Average Order Value</span>
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg">shopping_bag</span>
+</div>
+<h3 class="text-2xl font-bold font-headline">₹420.50</h3>
+<div class="flex items-center gap-1 text-xs text-primary mt-2 font-medium">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="">5% vs last week</span>
+</div>
+</div>
+</div>
+<!-- Analytics & Trends -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+<div class="lg:col-span-2 bg-white p-8 rounded-2xl shadow-[0px_4px_24px_rgba(254,60,6,0.04)] border border-primary/5">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-lg font-bold font-headline">Transaction Overview</h3>
+<div class="flex bg-background p-1 rounded-lg">
+<button class="px-4 py-1 text-xs font-semibold text-on-surface-variant hover:text-on-surface">Daily</button>
+<button class="px-4 py-1 text-xs font-semibold bg-white text-primary rounded-md shadow-sm">Weekly</button>
+<button class="px-4 py-1 text-xs font-semibold text-on-surface-variant hover:text-on-surface">Monthly</button>
+</div>
+</div>
+<div class="relative h-64 w-full">
+<!-- Chart Visualization with New Primary Color -->
+<div class="absolute inset-0 flex items-end justify-between gap-2">
+<div class="w-full bg-primary/5 rounded-t-lg h-[30%]"></div>
+<div class="w-full bg-primary/5 rounded-t-lg h-[45%]"></div>
+<div class="w-full bg-primary/10 rounded-t-lg h-[40%]"></div>
+<div class="w-full bg-primary/20 rounded-t-lg h-[65%]"></div>
+<div class="w-full bg-primary/40 rounded-t-lg h-[55%]"></div>
+<div class="w-full bg-primary/60 rounded-t-lg h-[85%]"></div>
+<div class="w-full bg-primary rounded-t-lg h-[75%]"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">
+<span class="">Mon</span><span class="">Tue</span><span class="">Wed</span><span class="">Thu</span><span class="">Fri</span><span class="">Sat</span><span class="">Sun</span>
+</div>
+</div>
+<!-- New Financial Insights Card -->
+<div class="bg-primary text-white p-8 rounded-2xl relative overflow-hidden flex flex-col justify-between shadow-xl shadow-primary/20">
+<div class="relative z-10">
+<div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-white">lightbulb</span>
+</div>
+<h3 class="text-xl font-bold font-headline mb-3 leading-tight">New Financial Insights</h3>
+<p class="text-white/80 text-sm leading-relaxed">Your revenue has increased by 14% this week. Sunday brunch is your most profitable time slot. Consider adding a 'Chef's Special' to boost it further.</p>
+</div>
+<a class="relative z-10 mt-6 inline-flex items-center gap-2 text-sm font-bold group" href="#">
+                    View detailed breakdown 
+                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+<!-- Decorative element -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+<div class="absolute -left-10 top-20 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+</div>
+</div>
+<!-- Recent Settlements Table -->
+<div class="bg-white rounded-2xl shadow-[0px_4px_24px_rgba(254,60,6,0.04)] border border-primary/5 overflow-hidden">
+<div class="px-8 py-6 border-b border-primary/5 flex justify-between items-center"><h3 class="text-lg font-bold font-headline">Transaction Overview</h3>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-1 bg-white p-1 rounded-full border border-primary/5">
+<button class="px-4 py-1.5 text-[10px] font-bold bg-[#FE3C06] text-white shadow-sm rounded-full">Week</button>
+<button class="px-4 py-1.5 text-[10px] font-bold text-on-surface-variant hover:bg-slate-100 rounded-full transition-all">Month</button>
+<button class="px-4 py-1.5 text-[10px] font-bold text-on-surface-variant hover:bg-slate-100 rounded-full transition-all">Quarter</button>
+<button class="px-4 py-1.5 text-[10px] font-bold text-on-surface-variant hover:bg-slate-100 rounded-full transition-all">Year</button>
+<button class="px-4 py-1.5 text-[10px] font-bold text-on-surface-variant hover:bg-slate-100 rounded-full transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">calendar_month</span>
+      Custom
+    </button>
+</div>
+<button class="text-primary text-sm font-bold flex items-center gap-1 hover:underline">View All Transactions</button>
+</div></div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-background/50">
+<tr>
+<th class="px-8 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Order</th>
+<th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Date</th>
+<th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Transaction ID</th>
+<th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Amount</th>
+<th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Status</th>
+<th class="px-8 py-4 text-right"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-primary/5">
+<tr class="hover:bg-background/40 transition-colors group">
+<td class="px-8 py-4">
+<span class="text-sm font-medium text-on-surface">#ORD-92834</span>
+</td>
+<td class="px-4 py-4 text-sm text-on-surface-variant">Oct 20, 2023</td>
+<td class="px-4 py-4 text-sm text-on-surface-variant">#TXN-42</td>
+<td class="px-4 py-4 font-semibold text-on-surface">₹1,450.00</td>
+<td class="px-4 py-4">
+<span class="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">Completed</span>
+</td>
+<td class="px-8 py-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-background/40 transition-colors group">
+<td class="px-8 py-4">
+<span class="text-sm font-medium text-on-surface">#ORD-92831</span>
+</td>
+<td class="px-4 py-4 text-sm text-on-surface-variant">Oct 19, 2023</td>
+<td class="px-4 py-4 text-sm text-on-surface-variant">#TXN-38</td>
+<td class="px-4 py-4 font-semibold text-on-surface">₹1,120.50</td>
+<td class="px-4 py-4">
+<span class="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">Completed</span>
+</td>
+<td class="px-8 py-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-background/40 transition-colors group">
+<td class="px-8 py-4">
+<span class="text-sm font-medium text-on-surface">#ORD-92798</span>
+</td>
+<td class="px-4 py-4 text-sm text-on-surface-variant">Oct 18, 2023</td>
+<td class="px-4 py-4 text-sm text-on-surface-variant">#TXN-51</td>
+<td class="px-4 py-4 font-semibold text-on-surface">₹2,040.20</td>
+<td class="px-4 py-4">
+<span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10">Completed</span>
+</td>
+<td class="px-8 py-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Bottom Mini Charts -->
+</main>
+</body></html>

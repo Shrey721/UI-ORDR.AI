@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ordr.AI | Food Insights Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#3d0700",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "surface-tint": "#FE3C06",
+                        "on-tertiary-container": "#fcfcfc",
+                        "surface-dim": "#d3daea",
+                        "primary-fixed": "#ffdad2",
+                        "primary-fixed-dim": "#ffb4a3",
+                        "outline-variant": "#e8bdb3",
+                        "on-primary-container": "#fffbff",
+                        "tertiary": "#5c5c5c",
+                        "inverse-surface": "#2a313d",
+                        "surface": "#f9f9ff",
+                        "tertiary-container": "#747474",
+                        "background": "#f9f9ff",
+                        "surface-container-highest": "#dce2f3",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e2e8f8",
+                        "on-secondary-fixed": "#002109",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#151c27",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "inverse-on-surface": "#ebf1ff",
+                        "secondary-fixed": "#7ffc97",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary-fixed": "#1b1b1b",
+                        "surface-variant": "#dce2f3",
+                        "secondary": "#006e2d",
+                        "on-secondary-container": "#007230",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#e7eefe",
+                        "primary-container": "#FE3C06",
+                        "on-secondary-fixed-variant": "#005320",
+                        "on-primary-fixed-variant": "#8b1b00",
+                        "inverse-primary": "#ffb4a3",
+                        "secondary-fixed-dim": "#62df7d",
+                        "outline": "#926f66",
+                        "on-background": "#151c27",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#7cf994",
+                        "error": "#ba1a1a",
+                        "primary": "#FE3C06",
+                        "surface-bright": "#f9f9ff",
+                        "on-surface-variant": "#5d3f38"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "1.25rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+        .bg-velocity-tint {
+            background-color: #fdf6f2;
+        }
+        /* Custom rounded bars override */
+        .bar-rounded-t {
+            border-top-left-radius: 9999px;
+            border-top-right-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="bg-velocity-tint text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-72 fixed left-0 top-0 z-40 bg-velocity-tint border-r border-surface-variant/50 flex flex-col py-8 overflow-y-auto">
+<div class="px-8 mb-10 flex items-center gap-2"><img alt="Ordr.AI Logo" class="h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ug3cYhXTI6EvkE0mlMBWIXxre2N91CDXaxFbdT5fO-DbNr8mUIW8Qx2KKf8LN6M-Bdruk4LkBv0gRhOUNw3Oetqdnaq8n2BuXtvIx6w1FpyCMPfb-S0gQGFT_zfw_RyrlrQjyco_FNBFk8E-ETkku_pPVc207VPD3GGXp1e_my5EguiqBgO4KyTqpUTT2Wtddv1YTC5z7y28gu4S1GhP3HFJba2FMHOoM_uI5n2BlOFyURbJN_-W361e6OUPFWTz8JhQPNQZTN6XoM"/></div>
+<nav class="flex-1 space-y-1">
+<a class="text-on-surface-variant hover:bg-surface-container-highest rounded-xl mx-4 my-1 flex items-center gap-3 px-4 py-3 transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-headline font-semibold text-sm tracking-tight">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-highest rounded-xl mx-4 my-1 flex items-center gap-3 px-4 py-3 transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-headline font-semibold text-sm tracking-tight">Menu Management</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-highest rounded-xl mx-4 my-1 flex items-center gap-3 px-4 py-3 transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-headline font-semibold text-sm tracking-tight">Customer Insights</span>
+</a>
+<!-- Active State: Food Insights -->
+<a class="bg-primary text-on-primary rounded-xl mx-4 my-1 flex items-center gap-3 px-4 py-3 shadow-lg shadow-primary/20 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined active-icon">analytics</span>
+<span class="font-headline font-bold text-sm tracking-tight">Food Insights</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-highest rounded-xl mx-4 my-1 flex items-center gap-3 px-4 py-3 transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-headline font-semibold text-sm tracking-tight">Financials</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-highest rounded-xl mx-4 my-1 flex items-center gap-3 px-4 py-3 transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-headline font-semibold text-sm tracking-tight">Logistic Insights</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-highest rounded-xl mx-4 my-1 flex items-center gap-3 px-4 py-3 transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-headline font-semibold text-sm tracking-tight">Outlet Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pt-8 space-y-1">
+<a class="text-on-surface-variant hover:bg-surface-container-highest rounded-xl flex items-center gap-3 px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined text-error">logout</span>
+<span class="font-headline font-semibold text-sm">Logout<br/></span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-72 min-h-screen pb-12">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 right-0 left-72 z-30 h-20 bg-velocity-tint/80 backdrop-blur-xl flex items-center justify-between px-8 border-b border-surface-variant/30">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50">search</span>
+<input class="w-full pl-12 pr-4 py-2.5 rounded-full border border-surface-variant/50 focus:ring-2 focus:ring-primary/20 text-sm placeholder:text-on-surface-variant/40 bg-background" placeholder="Search menu analytics, items, or trends..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden lg:flex items-center gap-8 mr-4">
+<a class="text-primary border-b-2 border-primary font-bold pb-2 text-sm" href="#"><br/></a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors pb-2 text-sm" href="#"><br/></a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors pb-2 text-sm" href="#"><br/></a>
+</nav>
+<div class="flex items-center gap-2">
+<button class="p-2.5 rounded-full hover:bg-surface-container-high transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2.5 w-2 h-2 bg-primary rounded-full border-2 border-surface"></span>
+</button>
+<button class="p-2.5 rounded-full hover:bg-surface-container-high transition-all"><span class="material-symbols-outlined">help</span></button>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-on-surface-variant/10">
+<div class="text-right">
+<p class="text-sm font-bold leading-none"><br/></p>
+<p class="text-[10px] text-on-surface-variant font-medium"><br/></p>
+</div>
+<img alt="Manager Avatar" class="w-10 h-10 rounded-full border-2 border-primary-fixed shadow-sm object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuv9CSHEWg7dyOXrHIvOY4sZ-O6g0l-zDuInPbNq1rLxW8t1F1r9VIibugB3XQdeRmT937Th306S4blzXBnjd95MWj-SCyNkuT3jZ-15dj_qVWwQfP8Aa68nBQ-jFlR0Wwj6ywWEERmp_AKO3GyOykzdJHor6a5nq4gktRLy2vMWN-9_MirqGt5QAMKmUdkQHmgCEK8zKQxOAaV1SeDOCW0u37YbrFQKGjlcCvF8pvFZtqVfMsCwPr6L7Gq1h16sAJM-TSZexJhnwU"/>
+</div>
+</div>
+</header>
+<!-- Content Body -->
+<div class="pt-28 px-8 max-w-[1600px] mx-auto space-y-8">
+<!-- Header Section -->
+<div class="flex items-end justify-between">
+<div>
+<h2 class="text-4xl font-black tracking-tight text-on-surface">Food Insights</h2>
+<p class="text-on-surface-variant font-medium mt-1">Detailed performance metrics for your kitchen ecosystem.</p>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low border border-surface-variant/50 p-1.5 rounded-xl">
+<button class="px-4 py-2 rounded-lg text-sm font-bold bg-surface-container-highest text-on-surface shadow-sm">Week</button>
+<button class="px-4 py-2 rounded-lg text-sm font-bold text-on-surface-variant hover:text-on-surface transition-all">Month</button>
+<button class="px-4 py-2 rounded-lg text-sm font-bold text-on-surface-variant hover:text-on-surface transition-all">Quarter</button>
+<button class="px-4 py-2 rounded-lg text-sm font-bold text-on-surface-variant hover:text-on-surface transition-all">Custom Range</button>
+<button class="ml-2 bg-primary text-on-primary px-5 py-2 rounded-lg font-bold text-sm flex items-center gap-2 active:scale-95 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">file_download</span>
+                        Export Report
+                    </button>
+</div>
+</div>
+<!-- Top KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+<div class="bg-white border border-surface-variant/50 card-shadow rounded-xl p-6 relative overflow-hidden group">
+<p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant/60 mb-2">Total Orders</p>
+<h3 class="text-3xl font-black text-on-surface">1,284</h3>
+<div class="mt-2 flex items-center gap-1 text-secondary font-bold text-xs">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+<span class="">+12.4%</span>
+</div>
+</div>
+<div class="bg-white border border-surface-variant/50 card-shadow rounded-xl p-6 relative overflow-hidden group">
+<p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant/60 mb-2">Gross Revenue</p>
+<h3 class="text-3xl font-black text-on-surface">₹425k</h3>
+<div class="mt-2 flex items-center gap-1 text-secondary font-bold text-xs">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+<span class="">+8.1%</span>
+</div>
+</div>
+<div class="bg-primary rounded-xl p-6 relative overflow-hidden group">
+<div class="relative z-10">
+<p class="text-xs font-bold uppercase tracking-wider text-on-primary/60 mb-2">Most Ordered</p>
+<h3 class="text-2xl font-black text-on-primary">Paneer Tikka</h3>
+<p class="text-on-primary/80 text-xs mt-1 font-medium">342 units sold</p>
+</div>
+</div>
+<div class="bg-white border border-surface-variant/50 card-shadow rounded-xl p-6 relative overflow-hidden group">
+<p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant/60 mb-2">Avg. Prep Time</p>
+<h3 class="text-3xl font-black text-on-surface">14.2m</h3>
+<div class="mt-2 flex items-center gap-1 text-primary font-bold text-xs">
+<span class="material-symbols-outlined text-xs">timer</span>
+<span class="">-2.1m improvement</span>
+</div>
+</div>
+<div class="bg-white border border-surface-variant/50 card-shadow rounded-xl p-6 relative overflow-hidden group">
+<p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant/60 mb-2">Top Value Order</p>
+<h3 class="text-3xl font-black text-on-surface">₹12,450</h3>
+<p class="text-on-surface-variant text-xs mt-1 font-medium">Bulk Corporate Order</p>
+</div>
+</div>
+<!-- Analytics Middle Grid -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Most Ordered Dishes Ranking -->
+<div class="col-span-12 lg:col-span-4 bg-white border border-surface-variant/50 card-shadow rounded-xl p-8">
+<div class="flex items-center justify-between mb-8">
+<h4 class="text-xl font-black text-on-surface">Top Performers</h4>
+<span class="material-symbols-outlined text-on-surface-variant/40">more_horiz</span>
+</div>
+<div class="space-y-6">
+<div class="flex items-center gap-4 group">
+<div class="w-12 h-12 bg-velocity-tint border border-surface-variant/50 rounded-xl flex items-center justify-center font-black text-primary">01</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Spicy Paneer Tikka</p>
+<p class="text-xs text-on-surface-variant font-medium">342 Orders</p>
+</div>
+<div class="text-right">
+<p class="text-secondary font-black">+14%</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-12 h-12 bg-velocity-tint border border-surface-variant/50 rounded-xl flex items-center justify-center font-black text-primary">02</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Truffle Mushroom Pasta</p>
+<p class="text-xs text-on-surface-variant font-medium">298 Orders</p>
+</div>
+<div class="text-right">
+<p class="text-secondary font-black">+9%</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-12 h-12 bg-velocity-tint border border-surface-variant/50 rounded-xl flex items-center justify-center font-black text-primary">03</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Classic Butter Chicken</p>
+<p class="text-xs text-on-surface-variant font-medium">275 Orders</p>
+</div>
+<div class="text-right">
+<p class="text-primary font-black">-2%</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-12 h-12 bg-velocity-tint border border-surface-variant/50 rounded-xl flex items-center justify-center font-black text-primary">04</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Garlic Naan Basket</p>
+<p class="text-xs text-on-surface-variant font-medium">241 Orders</p>
+</div>
+<div class="text-right">
+<p class="text-secondary font-black">+22%</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-12 h-12 bg-velocity-tint border border-surface-variant/50 rounded-xl flex items-center justify-center font-black text-primary">05</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Signature Cold Brew</p>
+<p class="text-xs text-on-surface-variant font-medium">198 Orders</p>
+</div>
+<div class="text-right">
+<p class="text-secondary font-black">+5%</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 py-3 rounded-xl bg-velocity-tint border border-surface-variant/50 hover:border-primary/20 hover:bg-white text-on-surface-variant text-sm font-bold transition-all">View Full Menu Performance</button>
+</div>
+<!-- Central Growth Chart -->
+<div class="col-span-12 lg:col-span-8 bg-white border border-surface-variant/50 card-shadow rounded-xl p-8 flex flex-col">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-xl font-black text-on-surface">Item Order Growth</h4>
+<p class="text-sm text-on-surface-variant font-medium">New vs. Returning Menu Trends</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary-fixed"></span>
+<span class="text-xs font-bold text-on-surface-variant">New Items</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-xs font-bold text-on-surface-variant">Best Sellers</span>
+</div>
+</div>
+</div>
+<div class="flex-1 flex items-end justify-between gap-4 pb-4">
+<!-- Chart Bars with Rounded Tops -->
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full space-y-1">
+<div class="w-full bg-primary-fixed bar-rounded-t h-16 group-hover:bg-[#FFDED6] transition-all"></div>
+<div class="w-full bg-primary bar-rounded-t h-24 group-hover:bg-primary/90 transition-all"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Mon</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full space-y-1">
+<div class="w-full bg-primary-fixed bar-rounded-t h-20 group-hover:bg-[#FFDED6] transition-all"></div>
+<div class="w-full bg-primary bar-rounded-t h-28 group-hover:bg-primary/90 transition-all"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Tue</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full space-y-1">
+<div class="w-full bg-primary-fixed bar-rounded-t h-32 group-hover:bg-[#FFDED6] transition-all"></div>
+<div class="w-full bg-primary bar-rounded-t h-48 group-hover:bg-primary/90 transition-all"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Wed</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full space-y-1">
+<div class="w-full bg-primary-fixed bar-rounded-t h-40 group-hover:bg-[#FFDED6] transition-all"></div>
+<div class="w-full bg-primary bar-rounded-t h-64 group-hover:bg-primary/90 transition-all"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Thu</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full space-y-1">
+<div class="w-full bg-primary-fixed bar-rounded-t h-24 group-hover:bg-[#FFDED6] transition-all"></div>
+<div class="w-full bg-primary bar-rounded-t h-36 group-hover:bg-primary/90 transition-all"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Fri</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full space-y-1">
+<div class="w-full bg-primary-fixed bar-rounded-t h-28 group-hover:bg-[#FFDED6] transition-all"></div>
+<div class="w-full bg-primary bar-rounded-t h-56 group-hover:bg-primary/90 transition-all"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Sat</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full space-y-1">
+<div class="w-full bg-primary-fixed bar-rounded-t h-32 group-hover:bg-[#FFDED6] transition-all"></div>
+<div class="w-full bg-primary bar-rounded-t h-52 group-hover:bg-primary/90 transition-all"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Sun</span>
+</div>
+</div>
+<!-- AI Insights Box -->
+<div class="mt-8 bg-velocity-tint p-6 rounded-xl flex gap-4 items-start border-l-4 border-primary">
+<span class="material-symbols-outlined text-primary" style='font-variation-settings: "FILL" 1;'>auto_awesome</span>
+<div>
+<h5 class="text-sm font-black text-on-surface">Ordr.AI Automated Insight</h5>
+<p class="text-sm text-on-surface-variant font-medium mt-1">Paneer Tikka orders increased by <span class="text-primary font-bold">12%</span> on weekends when paired with Garlic Naan. Consider a combo deal to boost average ticket size by <span class="text-secondary font-bold">~15%</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Pricing Insights Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-white border border-surface-variant/50 card-shadow rounded-xl p-8 flex items-center gap-6 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant/60 mb-1">Most Expensive Ordered</p>
+<h4 class="text-2xl font-black text-on-surface leading-tight">Wagyu Steak Platter</h4>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-primary font-black text-lg">₹4,850</span>
+<span class="text-on-surface-variant text-xs font-bold">• 18 orders this week</span>
+</div>
+</div>
+</div>
+<div class="bg-white border border-surface-variant/50 card-shadow rounded-xl p-8 flex items-center gap-6 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant/60 mb-1">Least Expensive Ordered</p>
+<h4 class="text-2xl font-black text-on-surface leading-tight">Masala Chai</h4>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-secondary font-black text-lg">₹45</span>
+<span class="text-on-surface-variant text-xs font-bold">• 842 orders this week</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Breakdown Table -->
+<section class="bg-white border border-surface-variant/50 card-shadow rounded-xl overflow-hidden">
+<div class="p-8 flex items-center justify-between">
+<h4 class="text-xl font-black text-on-surface">Menu Performance Breakdown</h4>
+<div class="flex gap-2">
+<div class="relative">
+<button class="bg-velocity-tint border border-surface-variant/50 p-2 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-2 group" id="filter-btn">
+<span class="material-symbols-outlined">filter_list</span>
+<span class="text-xs font-bold">Filter</span>
+</button>
+<!-- Dropdown Menu -->
+<div class="absolute right-0 mt-2 w-48 bg-surface-container-lowest border border-surface-variant/50 rounded-xl shadow-xl z-50 overflow-hidden hidden">
+<div class="py-1">
+<button class="w-full text-left px-4 py-2.5 text-sm font-bold text-on-surface hover:bg-surface-container-low transition-colors">
+                Appetizer
+            </button>
+<button class="w-full text-left px-4 py-2.5 text-sm font-bold text-on-surface hover:bg-surface-container-low transition-colors">
+                Beverage
+            </button>
+<button class="w-full text-left px-4 py-2.5 text-sm font-bold text-on-surface hover:bg-surface-container-low transition-colors">
+                Main Course
+            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-velocity-tint/50 border-b border-surface-variant/30">
+<tr>
+<th class="px-8 py-4 text-xs font-black uppercase tracking-widest text-on-surface-variant/60">Item Name</th>
+<th class="px-8 py-4 text-xs font-black uppercase tracking-widest text-on-surface-variant/60">Category</th>
+<th class="px-8 py-4 text-xs font-black uppercase tracking-widest text-on-surface-variant/60">Orders</th>
+<th class="px-8 py-4 text-xs font-black uppercase tracking-widest text-on-surface-variant/60">Revenue (₹)</th>
+<th class="px-8 py-4 text-xs font-black uppercase tracking-widest text-on-surface-variant/60">Avg. Rating</th>
+<th class="px-8 py-4 text-xs font-black uppercase tracking-widest text-on-surface-variant/60">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant/20">
+<tr class="group hover:bg-velocity-tint transition-colors">
+<td class="px-8 py-6 font-bold text-on-surface">Paneer Tikka</td>
+<td class="px-8 py-6 text-on-surface-variant text-sm font-medium">Appetizers</td>
+<td class="px-8 py-6 text-on-surface text-sm font-bold">1,420</td>
+<td class="px-8 py-6 text-on-surface text-sm font-bold">₹284,000</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm" style='font-variation-settings: "FILL" 1;'>star</span>
+<span class="text-sm font-bold">4.8</span>
+</div>
+</td>
+<td class="px-8 py-6"><span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-black uppercase tracking-widest rounded-full">STANDARD</span></td>
+</tr>
+<tr class="group hover:bg-velocity-tint transition-colors">
+<td class="px-8 py-6 font-bold text-on-surface">Avocado Toast</td>
+<td class="px-8 py-6 text-on-surface-variant text-sm font-medium">Beverage</td>
+<td class="px-8 py-6 text-on-surface text-sm font-bold">842</td>
+<td class="px-8 py-6 text-on-surface text-sm font-bold">₹168,400</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm" style='font-variation-settings: "FILL" 1;'>star</span>
+<span class="text-sm font-bold">4.2</span>
+</div>
+</td>
+<td class="px-8 py-6"><span class="px-3 py-1 bg-primary-fixed text-primary text-[10px] font-black uppercase tracking-widest rounded-full">BREAKFAST</span></td>
+</tr>
+<tr class="group hover:bg-velocity-tint transition-colors">
+<td class="px-8 py-6 font-bold text-on-surface">Quinoa Salad</td>
+<td class="px-8 py-6 text-on-surface-variant text-sm font-medium">Main Course<br/></td>
+<td class="px-8 py-6 text-on-surface text-sm font-bold">142</td>
+<td class="px-8 py-6 text-on-surface text-sm font-bold">₹42,600</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm" style='font-variation-settings: "FILL" 1;'>star</span>
+<span class="text-sm font-bold">3.1</span>
+</div>
+</td>
+<td class="px-8 py-6"><span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[10px] font-black uppercase tracking-widest rounded-full">snacks</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 bg-surface-container-high/30 flex justify-center border-t border-surface-variant/30">
+<button class="text-primary font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all">View All Menu Items <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+</div>
+</section>
+</div>
+</main>
+<!-- Contextual System Health (Floating Element) -->
+</body></html>
